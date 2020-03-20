@@ -1,0 +1,55 @@
+<ion-header>
+   <ion-toolbar>
+      <ion-buttons slot="start">
+         <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+         <ion-back-button defaultHref="dashboard"></ion-back-button>
+      </ion-buttons>
+      <ion-title>
+        {{teamname}}
+      </ion-title>
+   </ion-toolbar>
+</ion-header>
+<ion-content padding>
+   <ion-card>
+   <ion-card-header>
+   </ion-card-header>
+   <ion-card-content>
+      <ion-list>
+         <ion-item>
+            <ion-label>Colivers</ion-label>
+         <ul class="first-list">
+            <li>Overpaid(+)</li>
+            <li>UnderPaid(-)</li>
+         </ul>
+         </ion-item>
+     </ion-list>
+  
+  <ion-list>
+      <ion-item *ngFor="let user of positiveUser">
+               <ion-label>{{user.userName}}</ion-label>
+               <ion-buttons slot="end">
+                  <span>+€{{user.amountToPay}}</span>
+               </ion-buttons>
+            </ion-item>
+         </ion-list>
+         <ion-list>
+            <ion-item *ngFor="let user of negativeUser">
+               <ion-label>{{user.userName}}</ion-label>
+               <ion-buttons>
+                  <span>-€{{user.amountToPay}}</span>
+               </ion-buttons>
+            </ion-item>
+         </ion-list>
+       <ion-list>
+            <ion-item *ngFor="let user of balancedAmount">
+               <ion-label> <span class="bill-summary-list">{{user.from}} will pay €{{user.willPay}} to {{user.to}}</span></ion-label>
+            </ion-item>
+            <ion-item *ngIf="noOverdue" style="text-align: center;">
+               <ion-label><strong> No Overpaid/Underpaid Pending</strong></ion-label>
+            </ion-item>
+         </ion-list>
+      </ion-card-content>
+   </ion-card>
+</ion-content>

@@ -1,0 +1,54 @@
+<ion-header>
+   <ion-toolbar>
+      <ion-buttons slot="start">
+         <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+         <ion-back-button defaultHref="dashboard"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Flatemates Issues</ion-title>
+   </ion-toolbar>
+</ion-header>
+<ion-content fullscreen class="border">
+   <ion-row>
+      <ion-col>
+         <button [routerLink]="['/add-issues']" class="billList-class">
+            Add Issues  
+            <ion-icon ios="ios-add-circle" md="md-add-circle" style="margin-top: 2px;"></ion-icon>
+         </button>
+      </ion-col>
+   </ion-row>
+   <ion-row *ngIf="issuesArr?.length != 0">
+      <ion-col>
+         <span> 
+             <small>Click on issue to start thread.</small>
+          </span>
+      </ion-col>
+
+   </ion-row>
+   <ion-card *ngFor="let issue of issuesArr" [routerLink]="['/issue-thread']"  [queryParams]="{issueId: issue.issueId}"> 
+   <img src="https://apitx.kindlebit.com/uploads/{{issue.issueId}}" onError="src='assets/images/Logo-colive.png'" class="profile-img" />
+   <ion-card-header>
+      <!-- <ion-card-subtitle>{{issue.title}}</ion-card-subtitle> -->
+      <ion-card-title>{{issue.flatemateIssue?.title}}
+            <span *ngIf="logId === issue.flatemateIssue?.userId">
+               <ion-buttons (click)="removeIssue(issue.issueId)" class="listingButton">
+                  <ion-icon name="trash"></ion-icon>
+                  Delete
+               </ion-buttons>
+            </span>
+      </ion-card-title>
+       
+   </ion-card-header>
+   <ion-card-content>
+          <span>Against {{issue.userProfile?.firstName}}</span>  <span *ngIf="issue.userProfile?.firstName == ''"> {{issue.userProfile?.email}}</span><br/>  {{issue.flatemateIssue?.desc}}
+      
+   </ion-card-content>
+   </ion-card>
+   <ion-card>
+        <ion-item *ngIf="issuesArr?.length == 0">
+              <ion-label style="font-size:18px;">No issues uploaded</ion-label>
+      </ion-item>
+   </ion-card>
+  
+</ion-content>

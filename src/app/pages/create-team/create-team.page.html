@@ -1,0 +1,72 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+
+         <ion-buttons slot="end">
+             <ion-back-button defaultHref="dashboard"></ion-back-button>
+         </ion-buttons> 
+        <ion-title>
+            Create Group
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+ <form [formGroup]="team_form" (submit)="registerTeam(team_form.value)">
+
+        <ion-row>
+            <ion-col>
+                <div class="ion-text-start">
+                    <ion-item>
+                        <ion-label position="floating" style="color: #ed502d;">Name</ion-label>
+                        <ion-input type="text" formControlName="name" required></ion-input>
+                    </ion-item>
+                    <div *ngIf="submitted && f.name.errors" class="invalid-feedback" style=" text-align: left;color: red;font-weight: normal; font-size: 12px;font-style: italic;">
+                        <span *ngIf="f.name.errors.required" style=" text-align: left;color: red;">Group name is required.
+             </span>
+              <span *ngIf="f.name.errors.pattern" style=" text-align: left;color: red;">Group name is not filled up correctly.
+             </span>
+                    </div>
+                </div>
+            </ion-col>
+        </ion-row>  
+
+ 
+
+        <ion-row>
+            <ion-col>
+                <div class="ion-text-start">
+                    <ion-item>
+                        <ion-label position="floating" style="color: #ed502d;">Coliver</ion-label> 
+                        <ion-select multiple="true" formControlName="users" value="Select Users" okText="Okay" cancelText="Dismiss" >  
+                            <ion-select-option *ngFor="let userList of usersArr" [value]="userList.userId" [disabled]="isDisabled(userList?.login.username)">{{userList?.login.username}}<span *ngIf="isDisabled(userList?.login.username)">(Already Selected)</span></ion-select-option>
+                            <ion-select-option disabled="true" *ngIf="noUser">No Coliver Present</ion-select-option>
+                        </ion-select>  
+                    </ion-item>
+            
+                </div>
+            </ion-col>
+        </ion-row>  
+
+        <ion-row>
+            <ion-col>
+                <div class="ion-text-start">
+                   <div *ngIf="isSuccess == true" >
+                      <span class="for-sub-name">{{sucessArr.message}}</span>
+                    </div>
+                </div>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <div class="ion-text-start">
+                    <button class="submit-btn" expand="block" type="submit">Create Group
+                    </button>
+                </div>
+            </ion-col>
+        </ion-row> 
+    </form>
+
+</ion-content>

@@ -1,0 +1,46 @@
+<ion-header>
+   <ion-toolbar>
+      <ion-buttons slot="start">
+         <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+         <ion-back-button defaultHref="dashboard"></ion-back-button>
+      </ion-buttons>
+      <ion-title>
+         Groups
+      </ion-title>
+   </ion-toolbar>
+</ion-header>
+<ion-content padding>
+   <ion-row>
+      <ion-col [routerLink]="['/house-chores']">
+         <ion-button type ="button" color="mycolor" class="custom-btn">All</ion-button>
+      </ion-col>
+      <ion-col [routerLink]="['/calender']">
+         <ion-button type ="button"   color="mycolor" class="custom-btn">Calendar</ion-button>
+      </ion-col>
+      <ion-col [routerLink]="['/teams']">
+         <ion-button type ="button" color="mycolor" class="active custom-btn">Tasks of my groups</ion-button>
+      </ion-col>
+      <ion-col [routerLink]="['/add-tasks']">
+         <ion-button type ="button" color="mycolor" class="custom-btn">Add Task</ion-button>
+      </ion-col>
+   </ion-row>
+   <ion-card>
+      <ion-card-header>
+         <ion-card-subtitle>Task listing</ion-card-subtitle>
+         <ion-card-title>Tasks</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+         <ion-list>
+            <ion-item *ngFor="let taskList of taskListArr"  [routerLink]="['/add-suggestion']"  [queryParams]="{taskId: taskList.taskId}">
+            <ion-icon name="checkmark-circle-outline" style="height:20px;"></ion-icon>
+            <ion-label>{{taskList['task.task_name']}}</ion-label>
+              <ion-item-options>
+                   <button danger (click)="removeItem(taskList)"><ion-icon name="trash"></ion-icon> Delete</button>
+                 </ion-item-options>
+      </ion-item>
+         </ion-list>
+      </ion-card-content>
+   </ion-card>
+</ion-content>

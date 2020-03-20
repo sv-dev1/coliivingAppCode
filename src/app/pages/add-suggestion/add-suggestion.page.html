@@ -1,0 +1,84 @@
+<ion-header>
+   <ion-toolbar>
+      <ion-buttons slot="start">
+         <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+         <ion-back-button defaultHref="house-chores"></ion-back-button>
+      </ion-buttons>
+      <ion-title>
+         Add suggestions
+      </ion-title>
+   </ion-toolbar>
+</ion-header>
+<ion-content padding>
+   <ion-grid>
+      <ion-row>
+         <ion-col>
+            <ion-card [routerLink]="['/edit-task']" [queryParams]="{taskId: taskArr?.taskId}">
+               <ion-card-header>
+                  <ion-card-subtitle>Task Details</ion-card-subtitle>
+                  <ion-card-title style="color: #ed502d;font-size: 22px;">{{taskArr?.task_name}}</ion-card-title>
+               </ion-card-header>
+               <ion-card-content>
+                  <span class="notes">{{taskArr?.notes}}</span><br>
+                  <span class="task"><b>Task status</b>:&nbsp;{{taskArr?.status}}</span><br>
+                  <span class="task"><b>Task due date</b>:&nbsp;{{taskDate}}</span>
+               </ion-card-content>
+            </ion-card>
+         </ion-col>
+      </ion-row>
+   </ion-grid>
+   <ion-grid>
+      <ion-row>
+         <ion-col>
+            <div class="ion-text-start">
+               <ion-item>
+                  <ion-label position="floating" style="color: #ed502d;">Add new suggestion</ion-label>
+                  <ion-textarea placeholder="Add new suggestion" [(ngModel)]="suggestion"></ion-textarea>
+               </ion-item>
+            </div>
+         </ion-col>
+      </ion-row>
+      <ion-row>
+         <ion-col>
+            <div class="ion-text-start">
+               <ion-item>
+                  <button class="submit-btn" expand="block" type="submit" (click)="addSuggestion()" [disabled]="suggestion === ''" style="width:auto;text-align:left;    margin: 0 0 12px 0;">
+                  Add
+                  </button> 
+               </ion-item>
+            </div>
+         </ion-col>
+      </ion-row>
+   </ion-grid>
+   <ion-grid>
+      <ion-row>
+         <ion-col>
+            <div class="ion-text-start">
+               <ion-item>
+                  <ion-label position="floating" style="color: #ed502d;font-size:18px;">Old Suggestions:</ion-label>
+               </ion-item>
+            </div>
+         </ion-col>
+      </ion-row>
+      <ion-row>
+         <ion-list>
+            <ion-card *ngFor="let suggestion of  suggestionList">
+               <ion-item>
+                  <div item-left>
+                     <ion-img slot="end" src="assets/images/user_dummy.png" style="width: 36px;">  </ion-img>
+                  </div>
+                  <div item-right>
+                     <ion-label >{{suggestion.userProfile?.firstName}}</ion-label>
+                  </div>
+               </ion-item>
+               <ion-card-header>
+                  <ion-card-title style="color: #ed502d;font-size:15px;padding-top: 0;">{{ suggestion?.notes }}</ion-card-title>
+               </ion-card-header>
+               <ion-card-content style="color: #333;font-size:15px;padding-top: 0;">{{ suggestion?.created_at | date :'MMMM d, y, H:mm'}}</ion-card-content>
+            </ion-card>
+         </ion-list>
+      </ion-row>
+   </ion-grid>
+</ion-content>

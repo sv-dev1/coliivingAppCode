@@ -1,0 +1,88 @@
+<ion-header>
+   <ion-toolbar>
+      <ion-buttons slot="start">
+         <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+         <ion-back-button defaultHref="dashboard"></ion-back-button>
+      </ion-buttons>
+      <ion-title>
+         Application Details
+      </ion-title>
+   </ion-toolbar>
+</ion-header>
+<ion-content padding>
+     <ion-item class="application-header">
+        <ion-label>
+             {{isQuestionareObject?.login?.username}}
+        </ion-label>
+    </ion-item>
+   <ion-card>
+      <ion-card-content class="circle-pic" > 
+         <img  [src]="image_url" onError="src='assets/images/user_dummy.png'" class="data-img"> 
+      </ion-card-content>
+   </ion-card>
+   <ion-card>
+      <ion-card-content *ngIf="isQuestionareObject != null">
+         <ion-card-title>First name: <span> {{isQuestionareObject.userProfile.firstName}} </span></ion-card-title>
+         <ion-card-title>Phone Number: <span> {{isQuestionareObject.userProfile.phoneNo}} </span></ion-card-title>
+         <ion-card-title>Gender : <span> {{isQuestionareObject.userProfile.gender}} </span></ion-card-title>
+         <ion-card-title>Date Of Birth : <span> {{isQuestionareObject?.userProfile.dob | date :'MMMM d, y'}} </span></ion-card-title>
+         <ion-card-title> City/district to which you want to move : <span> {{isQuestionareObject.userProfile.favourite_location}} </span></ion-card-title>
+         <ion-card-title>Email : <span> {{isQuestionareObject.userProfile.email}} </span></ion-card-title>
+         <ion-card-title>Short bio : <span> {{isQuestionareObject.userProfile.biography}} </span></ion-card-title>
+         <ion-card-title>Interests : <span> {{isQuestionareObject.userProfile.interestes}} </span></ion-card-title>
+         <ion-card-title>WakeUpTime : <span> {{isQuestionareObject?.userProfile.wakeup_time}} </span></ion-card-title>
+         <ion-card-title>Day Of Moving : <span> {{isQuestionareObject?.userProfile.outing_day}} </span></ion-card-title>
+         <ion-card-title>Period of Stay : <span> {{isQuestionareObject?.userProfile.stay_date}} </span></ion-card-title>
+         <ion-card-title>Nationality : <span>{{nationality1}}<span *ngIf="nationality2"> {{nationality2}} </span></span></ion-card-title>
+         <ion-card-title>Language Known :  <span>{{language1}}<span *ngIf="language2">{{language2}} </span> </span></ion-card-title>
+         <ion-card-title>Price Range : <span> {{isQuestionareObject?.userProfile.price_range}} </span></ion-card-title>
+
+         <ion-card-title>Occuptation : 
+            <span *ngIf="isQuestionareObject?.userProfile.occuptation_tt == 1"> Full-time Employee</span>
+            <span *ngIf="isQuestionareObject?.userProfile.occuptation_tt == 2">Part-time Employee </span>
+            <span *ngIf="isQuestionareObject?.userProfile.occuptation_tt == 3"> Part Time Student</span>
+            <span *ngIf="isQuestionareObject?.userProfile.occuptation_tt == 4">Full Time  Student</span>
+            <span *ngIf="isQuestionareObject?.userProfile.occuptation_tt == 5">Part Time Internship</span>
+            <span *ngIf="isQuestionareObject?.userProfile.occuptation_tt == 6">Full Time Internship</span>
+         </ion-card-title>
+         <ion-card-title>Partying :
+            <span *ngIf="isQuestionareObject?.partying == 0">Yes</span>
+            <span *ngIf="isQuestionareObject?.partying == 1">No</span>
+            <span *ngIf="isQuestionareObject?.partying == 2">Sometimes</span>
+            <span *ngIf="isQuestionareObject?.partying == 3">Strictly against </span>
+         </ion-card-title>
+         <ion-card-title>Alcohol  : 
+            <span *ngIf="isQuestionareObject?.alcohol == 0">Yes</span>
+            <span *ngIf="isQuestionareObject?.alcohol == 1">No</span>
+            <span *ngIf="isQuestionareObject?.alcohol == 2">Sometimes</span>
+            <span *ngIf="isQuestionareObject?.alcohol == 3">Strictly against </span>
+         </ion-card-title>
+         <ion-card-title>Smoking  :    
+            <span *ngIf="isQuestionareObject?.smoking == 0">Yes</span>
+            <span *ngIf="isQuestionareObject?.smoking == 1">No</span>
+            <span *ngIf="isQuestionareObject?.smoking == 2">Sometimes</span>
+            <span *ngIf="isQuestionareObject?.smoking == 3">Strictly against </span>
+         </ion-card-title>
+         <ion-card-title>Apartment Clean Importance  :<span>{{isQuestionareObject?.apartment_clean_importance}}/5</span>       </ion-card-title>
+         <ion-card-title>Music  :    <span>{{isQuestionareObject?.music}}/5</span></ion-card-title>
+         <ion-card-title>Apartment Party  :    <span>{{isQuestionareObject?.apartment_party}}/5</span></ion-card-title>
+         <ion-card-title>Social media :    <span>{{isQuestionareObject?.social_account}}</span></ion-card-title>
+         
+      </ion-card-content>
+       <ion-card-content>
+         <ion-row>
+            <ion-col >
+               <button type="button" class="billList-class" (click)="response(isQuestionareObject,1)">Accept </button>
+            </ion-col>
+            <ion-col >
+               <button type="button" class="billList-class" (click)="response(isQuestionareObject,2)">Reject </button>
+            </ion-col>
+         </ion-row>
+      </ion-card-content>
+      <ion-card-content  *ngIf="isQuestionareObject == null">
+         No Data Available
+      </ion-card-content>
+   </ion-card>
+</ion-content>

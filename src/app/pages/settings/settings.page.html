@@ -1,0 +1,87 @@
+<ion-header>
+   <ion-toolbar>
+      <ion-buttons slot="start">
+         <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+         <ion-back-button defaultHref="dashboard"></ion-back-button>
+      </ion-buttons>
+      <ion-title>
+         Settings
+      </ion-title>
+   </ion-toolbar>
+</ion-header>
+<ion-content>
+   <form [formGroup]="setting_form" (submit)="submit()">
+
+   <ion-row>
+      <ion-col>
+         <ion-list>
+            <ion-item>
+               <ion-label>All Notifications</ion-label>
+               <ion-toggle  formControlName="notification" checked="true" color="danger"></ion-toggle>
+            </ion-item>
+         </ion-list>
+      </ion-col>
+   </ion-row>
+   
+   <ion-row>
+      <ion-col>
+         <ion-list>
+            <ion-item>
+               <ion-label>Join a group notifications</ion-label>
+               <ion-toggle  formControlName="g_notification" checked="true" color="danger"></ion-toggle>
+            </ion-item>
+         </ion-list>
+      </ion-col>
+   </ion-row>
+   
+   <ion-row>
+      <ion-col>
+         <ion-list>
+            <ion-item>
+               <ion-label>House chores shift notifications</ion-label>
+               <ion-toggle formControlName="hcs_notification" checked="true" color="danger"></ion-toggle>
+            </ion-item>
+         </ion-list>
+      </ion-col>
+   </ion-row>
+   
+   <ion-row>
+      <ion-col>
+         <ion-list>
+            <ion-item>
+               <ion-label>Chat messages notifications</ion-label>
+               <ion-toggle  formControlName="cm_notification" checked="true" color="danger"></ion-toggle>
+            </ion-item>
+         </ion-list>
+      </ion-col>
+   </ion-row>
+   
+   <ion-row>
+      <ion-col>
+         <ion-list>
+            <ion-item>
+               <ion-label>Bills notifications</ion-label>
+               <ion-toggle formControlName="b_notification" checked="true" color="danger"></ion-toggle>
+            </ion-item>
+         </ion-list>
+      </ion-col>
+   </ion-row>
+
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <button class="submit-btn" expand="block" type="submit">Save Changes
+            </button>
+         </div>
+      </ion-col>
+   </ion-row>
+   </form>
+  <ion-item class="custom">  
+    <span class="cutm-policy" (click)="redirectheapp('https://www.freeprivacypolicy.com/privacy/view/7a10aabac9e57a1b138755a444037066');
+" > Terms and conditions, privacy policy and GDPR</span>
+    </ion-item>
+
+
+</ion-content>

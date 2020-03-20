@@ -1,0 +1,68 @@
+<ion-header>
+   <ion-toolbar>
+      <ion-buttons slot="start">
+         <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+         <ion-back-button defaultHref="dashboard"></ion-back-button>
+      </ion-buttons>
+      <ion-title>
+         Bills : {{teamname}}
+      </ion-title>
+   </ion-toolbar>
+</ion-header>
+<ion-content padding>
+   <ion-row>
+      <ion-col>
+         <button [routerLink]="['/create-bills']" class="billList-class"> Add Bill </button>
+      </ion-col>
+      <ion-col>
+         <button [routerLink]="['/group-summary-page']" [queryParams]="{teamId: teamId,teamname: teamname}" class="billList-class"> Bill Summary </button>
+      </ion-col>
+   </ion-row>
+   <ion-row>
+      <ion-col>
+         <h2 class="bill-listing">Bills listing</h2>
+      </ion-col>
+   </ion-row>
+   <ion-card *ngFor="let bills of billsArr">
+      <ion-card-header>
+      <ion-card-subtitle></ion-card-subtitle>
+      <ion-card-title class="ion-text-start" >
+         <h2>
+            Title : {{bills.title}}
+            <span>
+               <ion-buttons (click)="removeBill(bills.bill_Id)" class="listingButton">
+                  <ion-icon name="trash"></ion-icon>
+                  Delete
+               </ion-buttons>
+            </span>
+         </h2>
+      </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+         Description:
+         <ion-item>Total Bill Paid Amount: {{bills.amount}} </ion-item>
+         <ion-item>Date: {{bills.date}}</ion-item>
+         <ion-item> Payer List:</ion-item>
+        <ion-list *ngFor="let ud of bills.userDetail">
+            <ion-item *ngIf="ud.paid != 0">
+              <ion-label> <b>{{ud?.userProfile?.login['username']}}</b><b *ngIf="ud?.userProfile?.login['username'] ==null">No Username</b> </ion-label>
+               <ion-buttons slot="end">
+                  €{{ud.paid}}
+               </ion-buttons>
+            </ion-item>
+         </ion-list>
+       <!--   <ion-item> Contributing Users:</ion-item>
+         <ion-list *ngFor="let ud of bills.userDetail">
+            <ion-item *ngIf="ud.paid != 0">
+               <ion-label> <b>{{ud?.userProfile?.login['username']}}</b><b *ngIf="ud?.userProfile?.login['username'] == null">No Username</b> </ion-label>
+            </ion-item>
+         </ion-list> -->
+      <img src= "{{image_base_url+''+bills.bill_Id}}" onError="src='assets/images/Logo-colive.png'" class="profile-img">
+      </ion-card-content>
+   </ion-card>
+   <ion-item *ngIf="billsArr.length == 0">
+      <h2> No bills updated yet.</h2>
+   </ion-item>
+</ion-content> 

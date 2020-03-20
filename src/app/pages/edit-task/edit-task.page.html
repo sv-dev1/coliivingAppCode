@@ -1,0 +1,71 @@
+<ion-header>
+   <ion-toolbar>
+      <ion-buttons slot="start">
+         <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+         <ion-back-button defaultHref="dashboard"></ion-back-button>
+      </ion-buttons>
+      <ion-title>
+         Edit task
+      </ion-title>
+   </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+	 <form [formGroup]="task_form" (submit)="editTask()">
+      <ion-row>
+         <ion-col>
+            <div class="ion-text-start">
+               <ion-item>
+                  <ion-label style="color: #ed502d;" position="floating">Task name</ion-label>
+                  <ion-input type="text" formControlName="task_name" required></ion-input>
+               </ion-item>
+               <div *ngIf="submitted && f.task_name.errors" class="invalid-feedback" style="padding: 10px; left;">
+                  <span *ngIf="f.task_name.errors.required" style=" text-align: left;color: red;font-style:italic;font-size: 12px;">Title is required.
+                  </span>
+                   <span *ngIf="f.task_name.errors.pattern" style=" text-align: left;color: red;font-style:italic;font-size: 12px;">Task name is not filled up correctly.
+                  </span>
+               </div>
+            </div>
+         </ion-col>
+      </ion-row>
+      <ion-row>
+         <ion-col>
+            <div class="ion-text-start">
+               <ion-item>
+                  <ion-label  position="floating" style="color: #ed502d;">Select Status</ion-label>
+                  <ion-select  formControlName="status"> 
+                       <ion-select-option  [value]="PENDING">PENDING</ion-select-option>
+                       <ion-select-option  [value]="COMPLETE" >COMPLETE</ion-select-option>
+
+                  </ion-select>
+               </ion-item>
+               <div *ngIf="submitted && f.status.errors" class="invalid-feedback" style="padding: 10px; left;">
+                  <span *ngIf="f.status.errors.required" style="text-align: left;color: red;font-style:italic;font-size: 12px;">This field is required.
+                  </span>
+               </div>
+            </div>
+         </ion-col>
+      </ion-row>
+      <ion-row>
+         <ion-col>
+            <div class="ion-text-start">
+               <ion-item>
+                  <ion-label style="color: #ed502d;" position="floating">Notes (optional)</ion-label>
+                  <ion-input type="text" formControlName="notes"></ion-input>
+               </ion-item>
+            </div>
+         </ion-col>
+      </ion-row>
+      <ion-row>
+         <ion-col>
+            <div class="ion-text-start">
+               <button class="submit-btn" expand="block" type="submit">Edit task
+               </button>
+            </div>
+         </ion-col>
+      </ion-row>
+   </form>
+
+</ion-content>

@@ -1,0 +1,53 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+
+         <ion-buttons slot="end">
+             <ion-back-button defaultHref="dashboard"></ion-back-button>
+         </ion-buttons> 
+        <ion-title>
+            Issue Communication
+        </ion-title>
+    </ion-toolbar>
+</ion-header> 
+
+
+<ion-content id="content" #content class="scroll-content ionic-scroll  has-header"> 
+ <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+     </ion-refresher> 
+<ion-grid class="scroll" style="-webkit-transform: translate3d(0px, -50px, 0px) scale(1); margin-top: 50px;">
+    <ion-row *ngFor="let message of gruopMessages"> 
+   <ion-col  class="message"> 
+        <ion-item style="--inner-border-width:0px!important;">
+            <span *ngIf="userId === message.userId" slot="end" class="user_name" style="border-radius: 10px;background: #e5efc2; padding: 10px;color: #000;word-wrap: break-word;">
+            {{ message.message }} 
+             <br>
+           <span>{{message.createdAt | date:'dd.MM hh:MM'}}</span>
+            </span>
+            <span *ngIf="userId !== message.userId" slot="start" class="user_name" style="    border-radius: 10px;background: #f1f1f1;padding: 10px;color: #000;border: 1px solid #dcd8d8;word-wrap: break-word;"> 
+          <b> {{message.login?.username}} </b>:{{message.message}} <br> {{message.createdAt | date:'dd.MM hh:MM'}}
+            </span> 
+        </ion-item> 
+      </ion-col> 
+    </ion-row> 
+  </ion-grid> 
+</ion-content> 
+<ion-footer>
+ <ion-toolbar> 
+    <ion-row class="message_row">
+      <ion-col col-11>
+        <ion-item no-lines>
+          <ion-input type="text" placeholder="Message" [(ngModel)]="message"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col col-1>
+        <button class="submit-btn" expand="block" type="submit" (click)="sendMessage()" [disabled]="message === ''" style="    background: #ed502d;;padding: 15px 20px;color: #fff;width: 100%;border-radius: 5px;">
+        Reply
+      </button> 
+      </ion-col>
+    </ion-row> 
+  </ion-toolbar>
+</ion-footer>

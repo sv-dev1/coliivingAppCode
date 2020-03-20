@@ -1,0 +1,56 @@
+
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons> 
+        <ion-buttons slot="end">
+            <ion-back-button defaultHref="properties-listing"></ion-back-button>
+         </ion-buttons> 
+        <ion-title>
+            Properties-Listing
+        </ion-title>
+    </ion-toolbar>
+</ion-header> 
+
+<ion-content padding>  
+ <ion-row>
+      <ion-col>
+        <button  [routerLink]="['/add-property']" class="billList-class"> Add Property <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon> </button>
+     </ion-col>
+  </ion-row>  
+
+  <ion-card  *ngFor="let property of propertiesArr">
+      <ion-card-header>
+         <ion-card-subtitle></ion-card-subtitle>
+         <ion-card-title class="ion-text-center" > 
+            <h2>-Title: {{property?.name}}</h2>
+         </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>   
+            -Bathroom available: {{property?.no_of_bathrooms}}<br>
+            -Property type: <span *ngIf="property?.property_type ==1">FLAT</span><span *ngIf="property?.property_type ==2"> ROOM</span><br> 
+            -Balconies available: {{property?.no_of_balconies}}<br> 
+            -Floor Space available: {{property?.floor_space}}<br> 
+            -Garages available: {{property?.no_of_garages}}<br> 
+            -Parking Space available: {{property?.no_of_parking_space}}<br>
+            -Pets Allowed: <span *ngIf="property?.pets_allowed ==1">YES</span><span *ngIf="property?.pets_allowed ==0"> NO</span><br> 
+            -Property Description: {{property?.property_desc}}<br> 
+            -Status: {{property?.status}}<br> 
+          <ion-item>
+              <ion-row>
+                  <ion-col> 
+                     <ion-button type ="button" color="mycolor" class="custom-btn" (click)="presentPopover(property)">Send Invitation</ion-button> 
+                     <!--  <ion-button type ="button" color="mycolor" class="custom-btn" [routerLink]="['/edit-property']" [queryParams]="{propertyId: property?.propertyId}">Edit Property</ion-button>  -->
+                  </ion-col>   
+              
+              </ion-row>  
+          </ion-item>
+    </ion-card-content>
+   </ion-card>   
+   <ion-card>
+      <ion-item *ngIf="propertiesArr?.length == 0">
+        <ion-label style="font-size:18px;">No property avaliable.</ion-label>
+      </ion-item>
+   </ion-card>
+</ion-content>

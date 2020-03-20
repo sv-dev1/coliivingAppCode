@@ -1,0 +1,27 @@
+* {
+  box-sizing: border-box;
+}
+
+.square-container {
+  padding: 8px;
+}
+
+.square {
+  width: calc(100% / 2);
+  float: left;
+  position: relative;
+  padding-bottom: calc(100% / 2);
+}
+
+.square .content {
+    width: calc(100% - 0px);
+    height: calc(100% - 0px); 
+    /* margin: 8px; */
+    padding: 16px;
+    position: absolute;
+    color: #424242;
+    background-color: white;
+    /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26); */ 
+    border: 1px solid grey;
+}
+    

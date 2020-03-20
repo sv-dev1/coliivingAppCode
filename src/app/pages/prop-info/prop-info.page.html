@@ -1,0 +1,147 @@
+<ion-header>
+   <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons> 
+        <ion-buttons slot="end">
+            <ion-back-button defaultHref="dashboard"></ion-back-button>
+         </ion-buttons> 
+        <ion-title>
+               Property details
+        </ion-title>
+   </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+ 
+   <ion-card>
+      <ion-card-content class="circle-pic" > 
+         <img  [src]="image_url" onError="src='assets/images/user_dummy.png'" class="profile-img"> 
+      </ion-card-content>
+   </ion-card>
+   <ion-card>
+      <ion-card-content>
+         <ion-list>
+            <ion-item>
+               <ion-label style="font-size:14px;">Status:</ion-label>
+               <ion-buttons slot="end">
+                  <span>{{propertyInfo?.status}}</span>
+               </ion-buttons>
+            </ion-item>
+         </ion-list>
+
+         <ion-list>
+            <ion-item>
+               <ion-label style="font-size:14px;">Property Name:</ion-label>
+               <ion-buttons slot="end">
+                  <span>{{propertyInfo?.name}}</span>
+               </ion-buttons>
+            </ion-item>
+         </ion-list>
+       
+         <ion-list>
+            <ion-item>
+               <ion-label style="font-size:14px;">City:</ion-label>
+               <ion-buttons slot="end">
+                  <span>{{propertyInfo?.city}}</span>
+               </ion-buttons>
+            </ion-item>
+         </ion-list>
+
+         <ion-list>
+            <ion-item>
+               <ion-label style="font-size:14px;">Type:</ion-label>
+               <ion-buttons slot="end">
+                <span *ngIf="propertyInfo?.property_type ==1">FLAT</span>
+                <span *ngIf="propertyInfo?.property_type ==2"> ROOM</span>
+               
+               </ion-buttons>
+            </ion-item>
+         </ion-list>
+
+         <ion-list>
+            <ion-item>
+               <ion-label style="font-size:14px;">Floor Space:</ion-label>
+               <ion-buttons slot="end">
+                  <span>{{propertyInfo?.floor_space}} per/sq.ft</span>
+               </ion-buttons>
+            </ion-item>
+         </ion-list>
+
+         <ion-list>
+            <ion-item>
+               <ion-label style="font-size:14px;">Number of Balcony/Terrace:</ion-label>
+               <ion-buttons slot="end">
+                  <span>{{propertyInfo?.no_of_balconies}}</span>
+               </ion-buttons>
+            </ion-item>
+         </ion-list>
+
+         <ion-list>
+            <ion-item>
+               <ion-label style="font-size:14px;">Number of Bedroom:</ion-label>
+               <ion-buttons slot="end">
+                  <span>{{propertyInfo?.no_of_bedrooms}}</span>
+               </ion-buttons>
+            </ion-item>
+         </ion-list>
+
+         <ion-list>
+            <ion-item>
+               <ion-label style="font-size:14px;">Number of Bathroom:</ion-label>
+               <ion-buttons slot="end">
+                  <span>{{propertyInfo?.no_of_bathrooms}}</span>
+               </ion-buttons>
+            </ion-item>
+         </ion-list>
+
+         <ion-list>
+           <ion-item>
+               <ion-label style="font-size:14px;">Number of garages:</ion-label>
+               <ion-buttons slot="end">
+                  <span>{{propertyInfo?.no_of_garages}}</span>
+               </ion-buttons>
+            </ion-item>
+         </ion-list>
+
+         <ion-list>
+            <ion-item>
+               <ion-label style="font-size:14px;">Number of parking space:</ion-label>
+               <ion-buttons slot="end">
+                  <span>{{propertyInfo?.no_of_parking_space}}</span>
+               </ion-buttons>
+            </ion-item>
+         </ion-list>
+
+         <ion-list>
+           <ion-item>
+            <ion-label style="font-size:14px;">Pets allowed:</ion-label>
+               <ion-buttons slot="end">
+                  <span *ngIf="propertyInfo?.pets_allowed ==1">YES</span>
+                  <span *ngIf="propertyInfo?.pets_allowed ==0"> NO</span>
+               </ion-buttons>
+            </ion-item>
+         </ion-list>
+
+         <ion-list>
+            <ion-item>
+               <ion-label style="font-size:14px;">Posted On:</ion-label>
+               <ion-buttons slot="end">
+                  <span>{{propertyInfo?.created_at | date}}</span>
+               </ion-buttons>
+            </ion-item>
+         </ion-list>
+
+         <ion-list>
+            <ion-item>
+               <ion-label style="font-size:14px;">Posted By:</ion-label>
+               <ion-buttons slot="end">
+                  <span>{{propertyInfo?.login['username']}}</span>
+               </ion-buttons>
+            </ion-item>
+         </ion-list>
+         
+      </ion-card-content>
+
+  </ion-card>
+</ion-content>

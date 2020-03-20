@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Login
+    <ion-label color="secondary" *ngIf="isSuccess== true">-Login Successfully!!!</ion-label>
+    </ion-title>
+
+    <ion-buttons slot="end">
+  <!--     <ion-button [routerLink]="['/new-item']">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button> -->
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<!-- 
+<ion-content padding>
+<form [formGroup]="login_form" (submit)="login(login_form.value)">
+    <ion-item>
+      <ion-label color="primary" position="floating">Username</ion-label>
+      <ion-input type="text" formControlName="username" required></ion-input>
+      <div *ngIf="isError== true && errorsArr.username">{{errorsArr.username}}</div> 
+              
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" position="floating">Password</ion-label>
+      <ion-input type="password" formControlName="password" required></ion-input>
+      <div *ngIf="isError== true && errorsArr.password">{{errorsArr.password}}</div> 
+    </ion-item>
+    <ion-button class="submit-btn" expand="block" type="submit" [disabled]="!login_form.valid" >Login</ion-button>
+  </form>
+<!-- [disabled]="!login_form.valid" -->
+<!--   <ion-list>
+    <ion-item *ngFor="let item of items" [routerLink]="['/update-item', item.id]">
+      <ion-label>
+        {{ item.title }}
+      </ion-label>
+    </ion-item>
+  </ion-list> 
+</ion-content> -->

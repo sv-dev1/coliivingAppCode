@@ -1,0 +1,91 @@
+  <ion-item>
+                  <div class="ion-text-start">    <button ion-item (click)="close()">Close</button>
+                  </div></ion-item>
+
+<ion-card *ngIf="owner == userId">
+   <ion-card-header>
+      <ion-card-subtitle>-Group Details-</ion-card-subtitle>
+      <ion-card-title>Group name</ion-card-title>
+   </ion-card-header>
+   <ion-card-content>
+
+   <form [formGroup]="update_from" (submit)="update(update_from.value)"> 
+      <ion-row>
+         <ion-col>
+            <ion-list>
+               <ion-item>
+                  <ion-label>Group title:</ion-label> 
+                     <ion-input type="hidden" formControlName="teamId"></ion-input> 
+                     <ion-input type="hidden" formControlName="owner"></ion-input> 
+                     <ion-input type="text" placeholder="Group Ttile" formControlName="title"></ion-input> 
+               </ion-item>  
+               <ion-item>
+                  <div class="ion-text-start">
+                     <button class="submit-btn" expand="block" type="submit">Update
+                     </button>
+                  </div> 
+               </ion-item>
+            </ion-list>
+         </ion-col>
+      </ion-row>
+   </form>
+   </ion-card-content>
+</ion-card>
+
+<ion-card>
+   <ion-card-header>
+      <ion-card-subtitle>-Group Members-</ion-card-subtitle>
+      <ion-card-title>Colivers <!-- <ion-card-subtitle>-Swipe left to see actions-</ion-card-subtitle>--></ion-card-title>
+   </ion-card-header>
+   <ion-card-content style="overflow: auto">
+      <ion-list style="">
+         <ion-item *ngFor="let user of userArr">
+            <ion-label slot="start" style="white-space: pre-wrap;">{{user?.login.username}}</ion-label>
+            <ion-button  *ngIf="owner != userId && user.userId == owner"  type="button" slot="start" class="secondary">Admin</ion-button>
+           <!--  <ion-button *ngIf="owner == userId" type="button" slot="end" >Set Admin</ion-button> -->
+            <ion-button (click)="removeUserApi(user.userId)" *ngIf="owner == userId && user.userId != owner" type="button" slot="end" >Remove</ion-button>
+         </ion-item> 
+      </ion-list>
+   </ion-card-content>
+</ion-card>
+
+<ion-card>
+   <ion-card-header>
+      <ion-card-subtitle>-Social Sharing-</ion-card-subtitle>
+      <ion-card-title>Referal Code</ion-card-title>
+   </ion-card-header>
+   <ion-card-content>
+      <ion-list>
+         <ion-item>
+            <ion-label style="white-space: pre-wrap;">If Your referal link is:- {{ref_link}}</ion-label>
+         </ion-item>
+         <ion-item>
+            <button shape="round" fill="outline" (click)="shareInfo()" class="button_team">Share </button>
+            <button shape="round" fill="outline" (click)="copyText($event)" class="button_team">Copy</button> 
+         </ion-item>
+         <ion-item>
+            <button shape="round" fill="outline" (click)="downloadPDF(teamId)" class="button_team">View Group CV</button> 
+         </ion-item>
+      </ion-list>
+   </ion-card-content>
+</ion-card>
+
+<ion-card>
+   <ion-card-header>
+      <ion-card-subtitle>-Join Group-</ion-card-subtitle>
+      <ion-card-title>Group Code</ion-card-title>
+   <ion-card-subtitle>Send below group code to join the group on join group page </ion-card-subtitle>
+   </ion-card-header>
+   <ion-card-content>
+      <ion-list>
+         <ion-item>
+            <ion-label style="white-space: pre-wrap;">Group code:-<br>{{teamId}}</ion-label>
+         </ion-item> 
+         <ion-item> 
+           <button shape="round" fill="outline" (click)="joinGroupShare()" class="button_team">Share </button>
+            <button shape="round" fill="outline" (click)="copyText(teamId)" class="button_team">Copy</button> 
+         </ion-item> 
+      </ion-list>
+   </ion-card-content>
+</ion-card>
+

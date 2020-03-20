@@ -1,0 +1,41 @@
+{
+    "declarations": {
+        "use_frameworks!": {
+            "declaration": "use_frameworks!",
+            "count": 2
+        }
+    },
+    "sources": {
+        "https://github.com/CocoaPods/Specs.git": {
+            "source": "https://github.com/CocoaPods/Specs.git",
+            "count": 2
+        }
+    },
+    "libraries": {
+        "FBSDKCoreKit": {
+            "name": "FBSDKCoreKit",
+            "spec": "5.7.0",
+            "count": 1
+        },
+        "FBSDKLoginKit": {
+            "name": "FBSDKLoginKit",
+            "spec": "5.7.0",
+            "count": 1
+        },
+        "FBSDKShareKit": {
+            "name": "FBSDKShareKit",
+            "spec": "5.7.0",
+            "count": 1
+        },
+        "GoogleSignIn": {
+            "name": "GoogleSignIn",
+            "spec": "~> 4.4.0",
+            "count": 1
+        },
+        "GoogleUtilities": {
+            "name": "GoogleUtilities",
+            "spec": "~> 6.3.0",
+            "count": 1
+        }
+    }
+}

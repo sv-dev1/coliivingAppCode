@@ -1,0 +1,89 @@
+
+<ion-content>
+ <ion-row>       
+    <ion-col>
+      <div class="ion-text-center"> 
+        <ion-img src="assets/images/Logo-colive.png" style="max-width: 170px;width: auto;text-align: center; margin: auto;"></ion-img>   
+      </div>
+    </ion-col>
+  </ion-row> 
+
+  <ion-row>       
+    <ion-col><div class="headd ion-text-center">  
+         <h6 style="margin-bottom: 0; margin-top: 0;font-weight: normal;font-size: 14px;">Login using social media to get quick access</h6></div>
+    </ion-col>
+  </ion-row>  
+  
+  <ion-row>   
+    <ion-col class="centered">  
+    <button class="submit-btn" expand="block" (click)="fbLogin()" style="border: none;padding: 10px 15px; margin: 30px 12px 20px 0; border-radius: 2px; background: #295dc3;color: #fff;" ><ion-icon name="logo-facebook"></ion-icon>Login</button>
+   <!--    <button class="submit-btn" expand="block" style="border: none;padding: 10px 15px;margin: 30px 10px 20px 0;border-radius: 2px;background: #23abff;color: #fff"><ion-icon name="logo-twitter"></ion-icon>Login</button> -->
+      <button class="submit-btn" (click)="googleLogin()" expand="block" style="border: none;padding: 10px 15px;margin: 30px 0 20px 0;border-radius: 2px;background: #ff2b26;color: #fff;"><ion-icon name="logo-google"></ion-icon>Login</button> 
+    </ion-col>
+  </ion-row> 
+
+<ion-segment>  
+  <ion-segment-button [routerLink]="['/register']"  value="register">
+    <ion-label>Register</ion-label>
+  </ion-segment-button>
+</ion-segment>
+
+<form [formGroup]="login_form" (submit)="login(login_form.value)">
+
+   <ion-row>
+      <ion-col>
+        <div class="ion-text-start">
+          <ion-item>
+            <ion-label position="floating">Username/Email</ion-label>
+            <ion-input type="text" formControlName="username" required></ion-input>   
+          </ion-item>
+          <div *ngIf="submitted && f.username.errors" class="invalid-feedback" style="padding: 10px; left;">
+             <span *ngIf="f.username.errors.required" style=" text-align: left;color: red;">Username is required.
+             </span> 
+          </div>
+          <div class="ion-text-left" style="text-align: left;padding: 10px;color: red;" *ngIf="isError== true && errorsArr.username">
+          {{errorsArr.username}}
+          </div> 
+        </div> 
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <div class="ion-text-start">
+          <ion-item> 
+            <ion-label position="floating">Password</ion-label>
+            <ion-input type="password" formControlName="password" required></ion-input> 
+          </ion-item>
+
+            <div class="ion-text-left" *ngIf="submitted && f.password.errors" class="invalid-feedback" style="padding: 10px;">
+              <span *ngIf="f.password.errors.required" style="text-align: left;color: red;">Password is required.</span> 
+            </div>
+            <div style="text-align: left;color: red;padding: 10px;" *ngIf="isError== true && errorsArr.password">{{errorsArr.password}}
+             </div> 
+        </div> 
+      </ion-col>
+    </ion-row>  
+
+    <ion-row> 
+        <a  [routerLink]="['/forgot-password']" class="forgotPassword">Forgot Password?</a></ion-row> 
+
+
+    <ion-row>
+        <ion-col>
+         <div class="ion-text-start">
+              <button class="submit-btn" expand="block" type="submit">Login</button>  
+         </div>
+        </ion-col>
+    </ion-row> 
+  
+  </form>  
+    <ion-row>
+     <ion-col> 
+      <div class="ion-text-center"> 
+           <a class="cutm-policy" href="https://www.freeprivacypolicy.com/privacy/view/7a10aabac9e57a1b138755a444037066" >Terms and conditions, privacy policy and GDPR</a>
+      </div>
+      </ion-col>
+    </ion-row>
+
+</ion-content>

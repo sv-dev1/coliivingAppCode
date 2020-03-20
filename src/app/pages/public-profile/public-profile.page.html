@@ -1,0 +1,144 @@
+<ion-header>
+   <ion-toolbar>
+      <ion-buttons slot="start">
+         <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+         <ion-back-button defaultHref="dashboard"></ion-back-button>
+      </ion-buttons>
+      <ion-title >
+         Profile
+      </ion-title>
+   </ion-toolbar>
+</ion-header>
+<ion-content padding>
+   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+   </ion-refresher>
+  
+      <ion-item class="profile-header">
+        <ion-label>
+             {{userDataArr.login?.username}}
+        </ion-label>
+    </ion-item>
+   <ion-card>
+      <ion-card-content class="circle-pic" > 
+         <img  [src]="image_url" onError="src='assets/images/user_dummy.png'" class="profile-img"> 
+      </ion-card-content>
+   </ion-card>
+   <ion-card>
+      <ion-card-content>
+         <ion-button fill="clear" expand="full" color="light" (click)="remove()" style="background: #ed502d;margin: 10px auto;display: block; width: auto;text-align: center;">
+            Remove Profile Picture     
+         </ion-button>
+         <ion-button fill="clear" expand="full" color="light" (click)="selectImage()" style="background: #ed502d;margin: 10px auto;display: block; width: auto;text-align: center;">
+            <ion-icon slot="start" name="camera"></ion-icon>
+            Upload Picture
+         </ion-button>
+      </ion-card-content>
+   </ion-card>
+   <ion-card [routerLink]="IsUserTanent ? ['/my-account'] : ['/landlord-profile-page']">
+      <ion-card-header>
+         <ion-card-title>Personal Details: </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+         <ion-card-title>Name: <span> {{userDataArr.firstName}} {{userDataArr.lastName}} </span></ion-card-title>
+        <ion-card-title>Date of birth:<span *ngIf="userDataArr.dob !='Invalid date'"> {{userDataArr.dob | date :'MMMM d, y'}}</span></ion-card-title>
+         <ion-card-title>Email: <span>{{userDataArr.email}}</span></ion-card-title>
+         <ion-card-title *ngIf="IsUserTanent">Gender: <span>{{userDataArr.gender}}</span></ion-card-title>
+         <ion-card-title *ngIf="IsUserTanent">Nationality: <span>{{nationality1}}<span *ngIf="nationality2"> {{nationality2}} </span></span></ion-card-title>
+         <ion-card-title>Phone number: <span>{{userDataArr.phoneNo}}</span></ion-card-title>
+         <ion-card-title *ngIf="IsUserTanent">Social media accounts: <span>{{userDataArr.social_account}}</span></ion-card-title>
+      </ion-card-content>
+   </ion-card>
+   <ion-card [routerLink]="IsUserTanent ? ['/my-account'] : ['/landlord-profile-page']">
+      <ion-card-header>
+         <ion-card-title>Contact Address:</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+         <ion-card-title>Address: <span>{{userDataArr.address}}</span></ion-card-title>
+         <ion-card-title>Postal Code: <span>{{userDataArr.postalCode}}</span></ion-card-title>
+         <ion-card-title>Country: <span>{{countryName}}</span></ion-card-title>
+         <ion-card-title *ngIf="IsUserTanent">Previous city of residence:<span> {{userDataArr.previous_city}}</span></ion-card-title>
+      </ion-card-content>
+   </ion-card>
+   <ion-card *ngIf="IsUserTanent" [routerLink]="['/my-account']">
+      <ion-card-header>
+         <ion-card-title>Occupation:</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+         <ion-card-title>Occupation : 
+            <span *ngIf="userDataArr.occuptation_tt == 1"> Full-time Employee</span>
+            <span *ngIf="userDataArr.occuptation_tt == 2">Part-time Employee </span>
+            <span *ngIf="userDataArr.occuptation_tt == 3"> Part Time Student</span>
+            <span *ngIf="userDataArr.occuptation_tt == 4">Full Time  Student</span>
+            <span *ngIf="userDataArr.occuptation_tt == 5">Part Time Internship</span>
+            <span *ngIf="userDataArr.occuptation_tt == 6">Full Time Internship</span>
+         </ion-card-title>
+         <ion-card-title>Price Range: {{userDataArr.price_range}} </ion-card-title>
+      </ion-card-content>
+   </ion-card>
+   <ion-card *ngIf="IsUserTanent" [routerLink]="['/my-account']">
+      <ion-card-header>
+         <ion-card-title>Other Details:</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+         <ion-card-title>Habits:<span> {{userDataArr.habits}}</span></ion-card-title>
+         <ion-card-title>Biography:<span> {{userDataArr.biography}}</span> </ion-card-title>
+         <ion-card-title>Interest: <span>{{userDataArr.interestes}}</span> </ion-card-title>
+         <ion-card-title>Languages: <span>{{language1}}<span *ngIf="language2">{{language2}} </span> </span></ion-card-title>
+         <ion-card-title>Outing day: <span>{{userDataArr.outing_day}}</span></ion-card-title>
+         <ion-card-title>Rental Description: <span>{{userDataArr.rental_desc}} </span></ion-card-title>
+      </ion-card-content>
+   </ion-card>
+   <ion-card [routerLink]="['/my-account']" *ngIf="IsUserTanent">
+      <ion-card-header>
+         <ion-card-title>Questionaire:</ion-card-title>
+      </ion-card-header>
+      <ion-card-content *ngIf ="userQuestionnaire">
+         <ion-card-title>
+            1)Which of these answers describes you the best?
+         </ion-card-title>
+         <ion-card-title>
+            a)&nbsp;Partying  
+            <span *ngIf="userDataArr.userQuestionnaire.partying == 0">Yes</span>
+            <span *ngIf="userDataArr.userQuestionnaire.partying == 1">No</span>
+            <span *ngIf="userDataArr.userQuestionnaire.partying == 2">Sometimes</span>
+            <span *ngIf="userDataArr.userQuestionnaire.partying == 3">Strictly against </span>
+         </ion-card-title>
+         <ion-card-title>
+            b)&nbsp;Alcohol  
+            <span *ngIf="userDataArr.userQuestionnaire.alcohol == 0">Yes</span>
+            <span *ngIf="userDataArr.userQuestionnaire.alcohol == 1">No</span>
+            <span *ngIf="userDataArr.userQuestionnaire.alcohol == 2">Sometimes</span>
+            <span *ngIf="userDataArr.userQuestionnaire.alcohol == 3">Strictly against </span>
+         </ion-card-title>
+         <ion-card-title>
+            c)&nbsp;Smoking
+            <span *ngIf="userDataArr.userQuestionnaire.smoking == 0">Yes</span>
+            <span *ngIf="userDataArr.userQuestionnaire.smoking == 1">No</span>
+            <span *ngIf="userDataArr.userQuestionnaire.smoking == 2">Sometimes</span>
+            <span *ngIf="userDataArr.userQuestionnaire.smoking == 3">Strictly against </span>
+         </ion-card-title>
+         <ion-card-title>
+            2)&nbsp;How important is it to you to live in a clean and tidy apartment generally?  
+            <span class="sutm-answer">{{userDataArr.userQuestionnaire.apartment_clean_importance}}</span>
+         </ion-card-title>
+         <ion-card-title>
+            3)&nbsp;How much do you like a music in your apartment?  
+            <span class="sutm-answer">{{userDataArr.userQuestionnaire.music}}</span>
+         </ion-card-title>
+         <ion-card-title>
+            4)&nbsp;Party in your apartment? 
+            <span class="sutm-answer">{{userDataArr.userQuestionnaire.apartment_party}}</span>
+         </ion-card-title>
+         <button slot="end" shape="round" fill="outline" (click)="resubmitQuestionare()" class="questionare">Re-submit Questionare</button>
+      </ion-card-content>
+      <ion-card-content *ngIf ="emptyUserQuestionnaire">
+         You have not submitted the questionare yet. Click on button 
+         <button slot="end" shape="round" fill="outline" (click)="resubmitQuestionare()" class="questionare">Submit Questionare</button>
+      </ion-card-content>
+   </ion-card>
+
+
+</ion-content>

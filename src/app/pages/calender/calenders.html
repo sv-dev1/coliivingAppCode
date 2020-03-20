@@ -1,0 +1,230 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+
+       <ion-buttons slot="end">
+           <ion-back-button defaultHref="dashboard"></ion-back-button>
+       </ion-buttons> 
+      <ion-title>
+          Calendar
+      </ion-title>
+  </ion-toolbar>
+<style>
+ [col-1] {
+      -webkit-box-flex: 0;
+      -webkit-flex: 0 0 8.33333%;
+      -ms-flex: 0 0 8.33333%;
+      flex: 0 0 14.285714285714286%;
+      width: 14.285714285714286%;
+      max-width: 14.285714285714286%;
+    }
+    .col {
+      text-align: center;
+      padding: 5px;
+    }
+    .last-month, .next-month {
+      color: #999999;
+      font-size: 90%;
+    }
+    .currentDate, .otherDate {
+      padding: 5px;
+    }
+    .currentDate {
+      font-weight: bold;
+      background-color: red;
+      color: white;
+      border-radius: 30px;
+    }
+    .onClickOfDate {
+      font-weight: bold;
+      background-color: #C0C0C0;
+      color: red;
+      border-radius: 30px;
+    }
+    .calendar-header {
+      background-color: #1a732d;
+      color: #FFFFFF;
+    }
+    .event-bullet {
+      margin: 2px auto;
+      height: 5px;
+      width: 5px;
+      background-color: green;
+      border-radius: 30px;
+    }
+    .selected-date {
+      width: 20px;
+      height: 2px;
+      background-color: blue;
+    }
+    .unselected-date {
+      border: none;
+    }
+ 
+      .grid {
+        padding: 0;
+      }
+      .col:last-child {
+        border-right: none;
+      }
+      .calendar-weekday, .calendar-date {
+        text-align: center;
+        margin: 0;
+      }
+      .calendar-weekday {
+        font-weight: bold;
+        border-bottom: solid 1px #1a732d;
+        background-color: #26ab56;
+      }
+      .calendar-date {
+        border-top: solid 1px #1a732d;
+        border-bottom: solid 1px #1a732d;
+    }
+    .main-cover {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+}
+.date-box {
+    background: #ed502e;
+    padding: 10px 10px; 
+    color: #fff;
+    border-radius: 8px;
+    width: 75%;
+}
+.left-box {
+    width: 20%;
+    color: #ed502e;
+    font-weight: 700;
+}
+.date-box p {
+    margin: 0;
+    padding: 0 0 2px 0;
+}
+.date-box.completed {
+    background: #8c8c8c;
+}
+.left-box {
+    position: relative;
+    background: #ed502e;
+    color: #fff !important;
+    text-align: center;
+    border-radius: 60px;
+    padding: 10px 0 5px 0;
+    height: 60px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 60px !important;
+    margin-right: 10px;
+    align-items: center;
+}
+.left-box p {
+    margin: 0;
+    width: 100%;
+    display: block;
+}
+.main-cover {
+    margin-bottom: 10px;
+}
+.main-cover .left-box:after {
+    content: "";
+    background: red;
+    width: 1px;
+    height: 40px;
+    position: absolute;
+    bottom: -40px;
+    left: 30px;
+}
+.main-cover .left-box:before {
+    content: "";
+    background: red;
+    width: 1px;
+    height: 30px;
+    position: absolute;
+    top: -30px;
+    left: 30px;
+}
+</style>  
+</ion-header> 
+
+<ion-content padding>  
+
+  <ion-row>
+    <ion-col [routerLink]="['/house-chores']"> 
+            <ion-button type ="button" color="mycolor" class="custom-btn">All</ion-button> 
+    </ion-col>  
+     <ion-col [routerLink]="['/calender']"> 
+            <ion-button type ="button"   color="mycolor" class="active custom-btn">Calendar</ion-button> 
+    </ion-col>   
+    <ion-col [routerLink]="['/teams']"> 
+            <ion-button type ="button" color="mycolor" class="custom-btn">Tasks of my groups</ion-button> 
+    </ion-col>   
+    <ion-col [routerLink]="['/add-tasks']">  
+            <ion-button type ="button" color="mycolor" class="custom-btn">Add Task</ion-button> 
+    </ion-col> 
+</ion-row>  
+
+  <div class="calendar-header">
+    <ion-row class="calendar-month">
+      <ion-col col-2 (click)="goToLastMonth()"><ion-icon name="arrow-back"></ion-icon></ion-col>
+      <ion-col col-8>{{currentMonth}} {{currentYear}}</ion-col>
+      <ion-col col-2 (click)="goToNextMonth()"><ion-icon name="arrow-forward"></ion-icon></ion-col>
+    </ion-row>
+  </div>
+  <div class="calendar-body">
+    <ion-grid>
+      <ion-row class="calendar-weekday">
+        <ion-col>Su</ion-col>
+        <ion-col>Mo</ion-col>
+        <ion-col>Tu</ion-col>
+        <ion-col>We</ion-col>
+        <ion-col>Th</ion-col>
+        <ion-col>Fr</ion-col>
+        <ion-col>Sa</ion-col>
+      </ion-row>
+      <ion-row class="calendar-date">
+        <ion-col col-1 *ngFor="let lastDay of daysInLastMonth" class="last-month" (click)="goToLastMonth()">{{lastDay}}</ion-col>
+        <ion-col col-1 *ngFor="let day of daysInThisMonth" (click)="selectDate(day)">
+          <span class="currentDate" *ngIf="currentDate === day; else otherDate" onchange="true">{{day}}</span>
+          <ng-template #otherDate class="otherDate">
+            {{day}}<br>
+            <div class="event-bullet" *ngIf="checkEvent(day)"></div>
+          </ng-template>
+        </ion-col>
+        <ion-col col-1 *ngFor="let nextDay of daysInNextMonth" class="next-month" (click)="goToNextMonth()">{{nextDay}}</ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <!-- <div class="selected-event" *ngIf="isSelected"> -->
+    <div class="selected-event my-class" *ngIf="isSelected">
+      <ion-list>
+        <ion-item *ngFor="let se of selectedEvent">
+          <div class="main-cover">
+            <div class="left-box completed" *ngIf="se.status =='COMPLETED'">
+              <span>{{se.due_date | date: 'MMM'}}</span>
+              <p>{{se.due_date | date: 'dd'}}</p>
+            </div>
+            <div class="left-box pending" *ngIf="se.status =='PENDING'">
+              <span>{{se.due_date | date: 'MMM'}}</span>
+              <p>{{se.due_date | date: 'dd'}}</p>
+            </div>
+             <div class="date-box completed" *ngIf="se.status =='COMPLETED'">
+                <p> Task: {{se.task_name}} </p>
+                <p> Status: {{se.status}} </p> 
+            </div>
+             <div class="date-box pending" *ngIf="se.status =='PENDING' ">
+              <p> Task: {{se.task_name}}</p>
+<!--               <p>Status: {{se.status}}</p> -->
+          </div>
+          </div>
+       
+         
+        </ion-item>
+      </ion-list>
+    </div>
+</ion-content>

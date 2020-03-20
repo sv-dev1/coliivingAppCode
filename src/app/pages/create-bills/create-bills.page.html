@@ -1,0 +1,173 @@
+<ion-header>
+   <ion-toolbar>
+      <ion-buttons slot="start">
+         <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+         <ion-back-button defaultHref="bill-listing"></ion-back-button>
+      </ion-buttons>
+      <ion-title>
+         Create Bill
+      </ion-title>
+   </ion-toolbar>
+</ion-header>
+<ion-content>
+   <form [formGroup]="bills_form" (submit)="register(bills_form.value)">
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label position="floating" style="color: #ed502d;">Purchased product</ion-label>
+               <ion-input type="text" formControlName="title" required></ion-input>
+            </ion-item>
+            <div *ngIf="submitted && f.title.errors" class="invalid-feedback" style="padding: 10px; left;">
+               <span *ngIf="f.title.errors.required" style=" text-align: left;color: red;">Purchased product is required.
+               </span>
+            </div>
+         </div>
+      </ion-col>
+   </ion-row>
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label  position="floating" style="color: #ed502d;" >Group</ion-label>
+               <ion-select formControlName="team" (ionChange)="onTeamSelection($event.target.value)" value="Select group" required>
+                  <ion-select-option value="" *ngIf="teamListArr?.length == 0">No group avaliable. Please create group!.</ion-select-option>
+                  <ion-select-option *ngFor="let teamList of teamListArr" [value]="teamList.teamId" selected>{{teamList.name}}</ion-select-option>
+               </ion-select>
+            </ion-item>
+            <div *ngIf="submitted && f.team.errors" class="invalid-feedback" style="padding: 10px; left;">
+               <span *ngIf="f.team.errors.required" style="  text-align: left;color: red;font-style:italic;font-size:12px;">Group  is required.
+               </span>
+            </div>
+         </div>
+      </ion-col>
+   </ion-row>
+
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-input type="number" formControlName="amount" placeholder="Bill amount"  required></ion-input>
+               <button type="button" style="width:auto;" slot="end">EURO</button>
+            </ion-item>
+            <div *ngIf="submitted && f.amount.errors" class="invalid-feedback" style="padding: 10px; left;">
+               <span *ngIf="f.amount.errors.required" style="  text-align: left;color: red;font-style:italic;font-size:12px;">Bill Amount is required.
+               </span>
+            </div>
+         </div>
+      </ion-col>
+   </ion-row>
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label position="floating" style="color: #ed502d;">Date</ion-label>
+               <ion-datetime formControlName="date" displayFormat="YYYY-MM-DD" placeholder="Select date" [max]="maxData" required></ion-datetime>
+            </ion-item>
+            <div *ngIf="submitted && f.date.errors" class="invalid-feedback" style="padding: 10px; left;">
+               <span *ngIf="f.date.errors.required" style=" text-align: left;color: red;font-style:italic;font-size:12px;">Date is required.
+               </span>
+            </div>
+         </div>
+      </ion-col>
+   </ion-row>
+   <ion-row *ngIf="userListArr.length > 0">
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-label style="color: #ed502d;" position="floating">Contributing colivers </ion-label>
+            <ion-list>
+               <ion-item>
+                  <ion-label><strong>Select All</strong></ion-label>
+                  <ion-checkbox slot="start" 
+                  [(ngModel)]="masterCheck"
+                  [indeterminate]="isIndeterminate"
+                  (click)="checkMaster($event)" [ngModelOptions]="{standalone: true}"></ion-checkbox>
+               </ion-item>
+            </ion-list>
+            <ion-list>
+               <ion-item *ngFor="let item of userListArr">
+                  <ion-label>{{item.login?.username}}</ion-label>
+                  <ion-checkbox slot="start" 
+                  [(ngModel)]="item.isChecked" 
+                  [value]="item.userId"
+                  (ionChange)="checkEvent($event)" [ngModelOptions]="{standalone: true}"></ion-checkbox>
+               </ion-item>
+            </ion-list>
+         </div>
+      </ion-col>
+   </ion-row>
+   <ion-row>
+      <ion-col>
+         <div *ngIf="submitted && f.assign_to.errors" class="invalid-feedback" style="padding: 10px; left;">
+            <span *ngIf="f.assign_to.errors.required" style=" text-align: left;color: red;">This field is required.
+            </span>
+         </div>
+      </ion-col>
+   </ion-row>
+  
+   <ion-row>
+      <div class="form-group">
+         <ion-label  position="floating" style="color: #ed502d;">Select who paid the bill</ion-label>
+         <div formArrayName="payees">
+            <div class="cus-margin" *ngFor="let item of websites.controls; let pointIndex=index" [formGroupName]="pointIndex">
+            <ion-row class="abc">
+             <ion-col class="bca">
+                  <ion-item> 
+                     <ion-select #c *ngIf="userListArr.length > 0" (ionChange)="setIndexHidden(c.value)" formControlName="user" value="Select Colivers" okText="Okay" cancelText="Dismiss" required> 
+                       <ion-label>Select Who paid</ion-label>  
+                           <ion-select-option *ngFor="let userList of userListArr" [value]="userList.userId" [disabled]="isDisabled(userList.userId)">{{userList.login?.username}}
+                           </ion-select-option>
+                     </ion-select> 
+                   </ion-item> 
+               </ion-col>
+               <ion-col class="bca">
+                  <input type="number" class="form-control" placeholder="Amount paid" formControlName="price"> 
+                  <button *ngIf="pointIndex != 0 "  type="button" (click)="removeUser(pointIndex)" class="btn btn-link btn-fw">Remove</button>
+               </ion-col>
+            </ion-row>
+         </div>
+         <div class="button-user">
+            <button type="button" (click)="addMoreSites()" class="btn btn-link btn-fw add-user">Add more payers</button>
+        </div>
+      </div>
+      </div>
+   </ion-row>
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label style="color: #ed502d;" position="floating">Upload photo of a bill</ion-label>
+            </ion-item>
+            <ion-item>
+               <ion-toolbar style="color: #ed502d;">
+                  <button type="button" fill="clear" expand="full" color="light" (click)="selectImage()">
+                     <ion-icon slot="start" name="camera"></ion-icon>
+                     Select Image
+                  </button>
+               </ion-toolbar>
+            </ion-item>
+            <img [src]="currentImage" *ngIf="currentImage">
+         </div>
+      </ion-col>
+   </ion-row>
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <div *ngIf="isSuccess == true" >
+               <span class="for-sub-name">{{sucessArr.message}}</span>
+            </div>
+         </div>
+      </ion-col>
+   </ion-row>
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <button class="submit-btn" expand="block" type="submit">Create Bill
+            </button>
+         </div>
+      </ion-col>
+   </ion-row>
+   </form>
+</ion-content>

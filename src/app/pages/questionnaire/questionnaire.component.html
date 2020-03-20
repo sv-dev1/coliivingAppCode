@@ -1,0 +1,154 @@
+<form [formGroup]="question_from" (submit)="registerQuestions(question_from.value)"> 
+<ion-slides #slides [options]="mySlideOptions" (didChange)="onSlideChanged()">
+<ion-slide>
+   <ion-radio-group formControlName="partying">
+      <ion-list-header>
+         <ion-label>Which of these answers describes you the best?&nbsp;<h1>Partying</h1></ion-label>
+         <ion-icon name="close" (click)="close()"></ion-icon>
+      </ion-list-header>
+      <ion-item>
+         <ion-label>Yes</ion-label>
+         <ion-radio value="0" ></ion-radio>
+      </ion-item>
+      <ion-item>
+         <ion-label>No</ion-label>
+         <ion-radio value="1"></ion-radio>
+      </ion-item>
+      <ion-item>
+         <ion-label>Sometimes</ion-label>
+         <ion-radio value="2"></ion-radio>
+      </ion-item>
+      <ion-item>
+         <ion-label>Strictly against</ion-label>
+         <ion-radio value="3"></ion-radio>
+      </ion-item>
+     </ion-radio-group>
+   <button type="button" float-right ion-button color="primary" class="btnNext" (click)="next()">Next</button>
+</ion-slide>
+<ion-slide>
+   <ion-radio-group  formControlName="smoking">
+      <ion-list-header>
+         <ion-label>Which of these answers describes you the best?&nbsp;<h1>Smoking</h1> </ion-label>
+         <ion-icon name="close" (click)="close()"></ion-icon>
+      </ion-list-header>
+      <ion-item>
+         <ion-label>Yes</ion-label>
+         <ion-radio value="0" ></ion-radio>
+      </ion-item>
+      <ion-item>
+         <ion-label>No</ion-label>
+         <ion-radio  value="1"></ion-radio>
+      </ion-item>
+      <ion-item>
+         <ion-label>Sometimes</ion-label>
+         <ion-radio  value="2"></ion-radio>
+      </ion-item>
+      <ion-item>
+         <ion-label>Strictly against</ion-label>
+         <ion-radio  value="3"></ion-radio>
+      </ion-item>
+   </ion-radio-group>
+   <button type="button" float-left ion-button  color="primary" class="btnPrev" (click)="prev()">Prev</button>
+   <button type="button" float-right ion-button color="primary" class="btnNext" (click)="next()">Next</button>
+</ion-slide>
+<ion-slide>
+   <ion-radio-group formControlName="alcohol" >
+      <ion-list-header>
+         <ion-label>Which of these answers describes you the best?&nbsp;<h1>Drinking alcohol</h1> </ion-label>
+         <ion-icon name="close" (click)="close()"></ion-icon>
+      </ion-list-header>
+      <ion-item>
+         <ion-label>Yes</ion-label>
+         <ion-radio  value="0"></ion-radio>
+      </ion-item>
+      <ion-item>
+         <ion-label>No</ion-label>
+         <ion-radio value="1"></ion-radio>
+      </ion-item>
+      <ion-item>
+         <ion-label>Sometimes</ion-label>
+         <ion-radio  value="2"></ion-radio>
+      </ion-item>
+      <ion-item>
+         <ion-label>Strictly against</ion-label>
+         <ion-radio  value="3"></ion-radio>
+      </ion-item>
+   </ion-radio-group>
+   <button type="button" float-left ion-button  color="primary" class="btnPrev" (click)="prev()">Prev</button>
+   <button type="button" float-right ion-button color="primary" class="btnNext" (click)="next()">Next</button>
+</ion-slide>
+<ion-slide>
+      <ion-list-header>
+         <ion-label>How important is it to you to live in a clean and tidy apartment generally? </ion-label>
+         <ion-icon name="close" (click)="close()"></ion-icon>
+      </ion-list-header>
+      <ion-item>
+         <ion-range min="0" max="5" step="1" color="secondary" formControlName="apartment_clean_importance">
+            <ion-label slot="start">0</ion-label>
+            <ion-label slot="end">5</ion-label>
+         </ion-range>
+      </ion-item>
+     <button type="button" float-left ion-button  color="primary" class="btnPrev" (click)="prev()">Prev</button>
+   <button type="button" float-right ion-button color="primary" class="btnNext" (click)="next()">Next</button>
+</ion-slide>
+<ion-slide>
+      <ion-list-header>
+         <ion-label>How much do you like a music in your apartment?</ion-label>
+         <ion-icon name="close" (click)="close()"></ion-icon>
+      </ion-list-header>
+      <ion-item>
+         <ion-range min="0" max="5" step="1" color="secondary" formControlName="music">
+            <ion-label slot="start">0</ion-label>
+            <ion-label slot="end">5</ion-label>
+         </ion-range>
+      </ion-item>
+   <button type="button" float-left ion-button  color="primary" class="btnPrev" (click)="prev()">Prev</button>
+   <button type="button" float-right ion-button color="primary" class="btnNext" (click)="next()">Next</button>
+</ion-slide>
+<ion-slide>
+      <ion-list-header>
+         <ion-label>Party in your apartment.</ion-label>
+         <ion-icon name="close" (click)="close()"></ion-icon>
+      </ion-list-header>
+      <ion-item>
+         <ion-range min="0" max="5" step="1" color="secondary" formControlName="apartment_party">
+            <ion-label slot="start">0</ion-label>
+            <ion-label slot="end">5</ion-label>
+         </ion-range>
+      </ion-item>
+      <ion-item>
+         <button type="button" float-left ion-button  color="primary" class="btnPrev" (click)="prev()">Prev</button>
+         <button class="submit-btn" float-right ion-button  color="primary" class="btnNext1"  type="submit">Submit
+         </button>
+      </ion-item>
+   <ion-item>
+      <div *ngIf="submitted && f.partying.errors" class="invalid-feedback" style="padding: 10px; left;">
+         <span *ngIf="f.partying.errors.required" style=" text-align: left;color: red;font-style:italic;font-size: 12px;">Partying Field is required.
+         </span>
+      </div>
+      <div *ngIf="submitted && f.smoking.errors" class="invalid-feedback" style="padding: 10px; left;">
+         <span *ngIf="f.smoking.errors.required" style=" text-align: left;color: red;font-style:italic;font-size: 12px;">Smoking Field is required.
+         </span>
+      </div>
+      <div *ngIf="submitted && f.alcohol.errors" class="invalid-feedback" style="padding: 10px; left;">
+         <span *ngIf="f.alcohol.errors.required" style=" text-align: left;color: red;font-style:italic;font-size: 12px;">Alcohol Field is required.
+         </span>
+      </div>
+   </ion-item>
+   <ion-item>
+      <div *ngIf="submitted && f.apartment_clean_importance.errors" class="invalid-feedback" style="padding: 10px; left;">
+         <span *ngIf="f.apartment_clean_importance.errors.required" style=" text-align: left;color: red;font-style:italic;font-size: 12px;">Select Range in apartment.
+         </span>
+      </div>
+      <div *ngIf="submitted && f.music.errors" class="invalid-feedback" style="padding: 10px; left;">
+         <span *ngIf="f.music.errors.required" style=" text-align: left;color: red;font-style:italic;font-size: 12px;">Select range for music.
+         </span>
+      </div>
+      <div *ngIf="submitted && f.apartment_party.errors" class="invalid-feedback" style="padding: 10px; left;">
+         <span *ngIf="f.apartment_party.errors.required" style=" text-align: left;color: red;font-style:italic;font-size: 12px;">Select range for Apartment party.
+         </span>
+      </div>
+   </ion-item>
+</ion-slide>
+</ion-slides>
+</form>

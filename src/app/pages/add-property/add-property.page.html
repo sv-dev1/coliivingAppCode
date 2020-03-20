@@ -1,0 +1,274 @@
+<ion-header>
+   <ion-toolbar>
+      <ion-buttons slot="start">
+         <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+         <ion-back-button defaultHref="property-listing"></ion-back-button>
+      </ion-buttons>
+      <ion-title>
+         Add property
+      </ion-title>
+   </ion-toolbar>
+</ion-header>
+<ion-content>
+   <form [formGroup]="property_form" (submit)="register(property_form.value)">
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label position="floating" style="color: #ed502d;">Name</ion-label>
+               <ion-input type="text" formControlName="name" required></ion-input>
+            </ion-item>
+            <div *ngIf="submitted && f.name.errors" class="invalid-feedback" style="padding: 10px; left;">
+               <span *ngIf="f.name.errors.required" style=" text-align: left;color: red;">Property name is required.
+               </span>
+            </div>
+         </div>
+      </ion-col>
+   </ion-row>
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label  style="color: #ed502d;" position="floating">Balcony/Terrace</ion-label>
+               <ion-select formControlName="no_of_balconies" okText="Okay" cancelText="Dismiss">
+                  <ion-select-option value="0">0</ion-select-option>
+                  <ion-select-option value="1">1</ion-select-option>
+                  <ion-select-option value="2">2</ion-select-option>
+                  <ion-select-option value="3">3</ion-select-option>
+                  <ion-select-option value="4">4</ion-select-option>
+               </ion-select>
+            </ion-item>
+            <div *ngIf="submitted && f.no_of_balconies.errors" class="invalid-feedback" style="padding: 10px; left;">
+               <span *ngIf="f.no_of_balconies.errors.required" style=" text-align: left;color: red;">Balconies is required.
+               </span>
+            </div>
+         </div>
+      </ion-col>
+   </ion-row>
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label  style="color: #ed502d;" position="floating">Property Type</ion-label>
+               <ion-select formControlName="property_type" okText="Okay" cancelText="Dismiss">
+                  <ion-select-option value="1">Flat</ion-select-option>
+                  <ion-select-option value="2">Room</ion-select-option>
+               </ion-select>
+            </ion-item>
+            <div *ngIf="submitted && f.property_type.errors" class="invalid-feedback" style="padding: 10px; left;">
+               <span *ngIf="f.property_type.errors.required" style=" text-align: left;color: red;">Property Type is required.
+               </span>
+            </div>
+         </div>
+      </ion-col>
+   </ion-row>
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label  style="color: #ed502d;" position="floating">Bedrooms</ion-label>
+               <ion-select formControlName="no_of_bedrooms" okText="Okay" cancelText="Dismiss">
+                  <ion-select-option value="1">1</ion-select-option>
+                  <ion-select-option value="2">2</ion-select-option>
+                  <ion-select-option value="3">3</ion-select-option>
+                  <ion-select-option value="4">4</ion-select-option>
+               </ion-select>
+            </ion-item>
+            <div *ngIf="submitted && f.no_of_bedrooms.errors" class="invalid-feedback" style="padding: 10px; left;">
+               <span *ngIf="f.no_of_bedrooms.errors.required" style=" text-align: left;color: red;">Bedrooms is required.
+               </span>
+            </div>
+         </div>
+      </ion-col>
+   </ion-row>
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label  style="color: #ed502d;" position="floating">Bathrooms</ion-label>
+               <ion-select formControlName="no_of_bathrooms" okText="Okay" cancelText="Dismiss">
+                  <ion-select-option value="1">1</ion-select-option>
+                  <ion-select-option value="2">2</ion-select-option>
+                  <ion-select-option value="3">3</ion-select-option>
+                  <ion-select-option value="4">4</ion-select-option>
+               </ion-select>
+            </ion-item>
+            <div *ngIf="submitted && f.no_of_bathrooms.errors" class="invalid-feedback" style="padding: 10px; left;">
+               <span *ngIf="f.no_of_bathrooms.errors.required" style=" text-align: left;color: red;">Bathrooms is required.
+               </span>
+            </div>
+         </div>
+      </ion-col>
+   </ion-row>
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label  style="color: #ed502d;" position="floating">Kitchens</ion-label>
+               <ion-select formControlName="no_of_kitchens" okText="Okay" cancelText="Dismiss">
+                  <ion-select-option value="1">1</ion-select-option>
+                  <ion-select-option value="2">2</ion-select-option>
+               </ion-select>
+            </ion-item>
+            <div *ngIf="submitted && f.no_of_kitchens.errors" class="invalid-feedback" style="padding: 10px; left;">
+               <span *ngIf="f.no_of_kitchens.errors.required" style=" text-align: left;color: red;">Kitchens detail is required.
+               </span>
+            </div>
+         </div>
+      </ion-col>
+   </ion-row>
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label  style="color: #ed502d;" position="floating">Garages:</ion-label>
+               <ion-select formControlName="no_of_garages" okText="Okay" cancelText="Dismiss">
+                  <ion-select-option value="0">0</ion-select-option>
+                  <ion-select-option value="1">1</ion-select-option>
+                  <ion-select-option value="2">2</ion-select-option>
+                  <ion-select-option value="3">3</ion-select-option>
+                  <ion-select-option value="4">4</ion-select-option>
+               </ion-select>
+            </ion-item>
+            <div *ngIf="submitted && f.no_of_garages.errors" class="invalid-feedback" style="padding: 10px; left;">
+               <span *ngIf="f.no_of_garages.errors.required" style=" text-align: left;color: red;">Garbages is required.
+               </span>
+            </div>
+         </div>
+      </ion-col>
+   </ion-row>
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label  style="color: #ed502d;" position="floating">Parking Spaces</ion-label>
+               <ion-select formControlName="no_of_parking_space" okText="Okay" cancelText="Dismiss">
+                  <ion-select-option value="0">0</ion-select-option>
+                  <ion-select-option value="1">1</ion-select-option>
+                  <ion-select-option value="2">2</ion-select-option>
+               </ion-select>
+            </ion-item>
+            <div *ngIf="submitted && f.no_of_parking_space.errors" class="invalid-feedback" style="padding: 10px; left;">
+               <span *ngIf="f.no_of_parking_space.errors.required" style=" text-align: left;color: red;">Parking Space is required.
+               </span>
+            </div>
+         </div>
+      </ion-col>
+   </ion-row>
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label position="floating" style="color: #ed502d;">Floor space(per/sq ft.)</ion-label>
+               <ion-input type="number" formControlName="floor_space" required></ion-input>
+            </ion-item>
+            <div *ngIf="submitted && f.floor_space.errors" class="invalid-feedback" style="padding: 10px; left;">
+               <span *ngIf="f.floor_space.errors.required" style=" text-align: left;color: red;">Floor Space is required.
+               </span>
+            </div>
+         </div>
+      </ion-col>
+   </ion-row>
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label position="floating" style="color: #ed502d;">Pet Allowed</ion-label>
+               <ion-select formControlName="pets_allowed" okText="Okay" cancelText="Dismiss">
+                  <ion-select-option value="0">No</ion-select-option>
+                  <ion-select-option value="1">Yes</ion-select-option>
+               </ion-select>
+            </ion-item>
+            <div *ngIf="submitted && f.pets_allowed.errors" class="invalid-feedback" style="padding: 10px; left;">
+               <span *ngIf="f.pets_allowed.errors.required" style=" text-align: left;color: red;">Pet Information is required.
+               </span>
+            </div>
+         </div>
+      </ion-col>
+   </ion-row>
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label position="floating" style="color: #ed502d;">Status</ion-label>
+               <ion-select formControlName="status" okText="Okay" cancelText="Dismiss">
+                  <ion-select-option value="1">Available</ion-select-option>
+                  <ion-select-option value="2">No</ion-select-option>
+               </ion-select>
+            </ion-item>
+            <div *ngIf="submitted && f.status.errors" class="invalid-feedback" style="padding: 10px; left;">
+               <span *ngIf="f.status.errors.required" style=" text-align: left;color: red;">Status is required.
+               </span>
+            </div>
+         </div>
+      </ion-col>
+   </ion-row>
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-label style="color: #ed502d;font-size: 13px; padding-left: 15px;" position="floating">Location:</ion-label>
+            <ion-item>
+               <input class="input_location" ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places" (onAddressChange)="onChange($event)" formControlName="city"  
+               />
+            </ion-item>
+            <div *ngIf="submitted && f.city.errors" class="invalid-feedback" style="padding: 10px; left;">
+               <span *ngIf="f.city.errors.required" style=" text-align: left;color: red;">city is required.
+               </span>
+            </div>
+         </div>
+      </ion-col>
+   </ion-row>
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label position="floating" style="color: #ed502d;">Property Description</ion-label>
+               <ion-textarea formControlName="property_desc" required></ion-textarea>
+            </ion-item>
+            <div *ngIf="submitted && f.property_desc.errors" class="invalid-feedback" style="padding: 10px; left;">
+               <span *ngIf="f.property_desc.errors.required" style=" text-align: left;color: red;">Property Decription is required.
+               </span>
+            </div>
+         </div>
+      </ion-col>
+   </ion-row>
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-thumbnail slot="end">
+                  <ion-img [src]="image_url" *ngIf="image_url"></ion-img>
+               </ion-thumbnail>
+            </ion-item>
+            <ion-item>
+               <ion-toolbar style="color: #ed502d;">
+                  <button type="button" fill="clear" expand="full" color="light" (click)="selectImage()">
+                     <ion-icon slot="start" name="camera"></ion-icon>
+                     Upload Photo
+                  </button>
+               </ion-toolbar>
+            </ion-item>
+         </div>
+      </ion-col>
+   </ion-row>
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <div *ngIf="isSuccess == true" >
+               <span class="for-sub-name">{{sucessArr.message}}</span>
+            </div>
+         </div>
+      </ion-col>
+   </ion-row>
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <button class="submit-btn" expand="block" type="submit">Add Property
+            </button>
+         </div>
+      </ion-col>
+   </ion-row>
+   </form>
+</ion-content>

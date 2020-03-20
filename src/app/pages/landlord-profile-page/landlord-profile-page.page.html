@@ -1,0 +1,212 @@
+<ion-header>
+   <ion-toolbar>
+      <ion-buttons slot="start">
+         <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+         <ion-back-button defaultHref="dashboard"></ion-back-button>
+      </ion-buttons>
+      <ion-title >
+        Edit Profile
+      </ion-title>
+   </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+   <form *ngIf="loginRoleId==3" [formGroup]="update_form" (submit)="register(update_form.value)">
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label class="pk"  style="color: #ed502d;" position="floating">First name:</ion-label>
+               <ion-input type="text" formControlName="firstName" required></ion-input>
+            </ion-item>
+            <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback" style="padding: 10px; left;">
+               <span *ngIf="f.firstName.errors.required" style=" text-align: left;color: red;">First Name is required.
+               </span>
+            </div>
+         </div>
+      </ion-col>
+   </ion-row>
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label style="color: #ed502d;" position="floating">Last name:</ion-label>
+               <ion-input type="text" formControlName="lastName" required></ion-input>
+            </ion-item>
+            <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback" style="padding: 10px; left;">
+               <span *ngIf="f.lastName.errors.required" style=" text-align: left;color: red;">Last Name is required.
+               </span>
+            </div>
+         </div>
+      </ion-col>
+   </ion-row>
+    <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label style="color: #ed502d;" position="floating">User name:</ion-label>
+               <ion-input type="text" formControlName="username" required></ion-input>
+            </ion-item>
+            <div *ngIf="submitted && f.username.errors" class="invalid-feedback" style="padding: 10px; left;">
+               <span *ngIf="f.username.errors.required" style=" text-align: left;color: red;">User Name is required.
+               </span>
+            </div>
+         </div>
+      </ion-col>
+   </ion-row>
+    <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label style="color: #ed502d;" position="floating">Email:</ion-label>
+               <ion-input type="text" formControlName="email" required></ion-input>
+            </ion-item>
+            <div *ngIf="submitted && f.email.errors" class="invalid-feedback" style="padding: 10px; left;">
+               <span *ngIf="f.email.errors.required" style=" text-align: left;color: red;">Email is required.
+               </span>
+            </div>
+         </div>
+      </ion-col>
+   </ion-row>
+   <ion-row>
+     <ion-col>
+         <div class="ion-text-start">
+            <ion-label style="color: #ed502d;font-size: 13px; padding-left: 15px;" position="floating">Location:</ion-label>
+            <ion-item>
+                <input class="input_location" ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places" (onAddressChange)="onChange($event)" formControlName="address"  
+                     />
+            </ion-item>
+             <div *ngIf="submitted && f.address.errors" class="invalid-feedback" style="padding: 10px; left;">
+                  <span *ngIf="f.address.errors.required" style=" text-align: left;color: red;">Address is required.
+                  </span>
+               </div>
+         </div>
+      </ion-col>
+   </ion-row>
+  <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label  style="color: #ed502d;" position="floating">Postal code:</ion-label>
+               <ion-input type="text" formControlName="postal_code" required></ion-input>
+            </ion-item>
+            <div *ngIf="submitted && f.postal_code.errors" class="invalid-feedback" style="padding: 10px; left;">
+               <span *ngIf="f.postal_code.errors.required" style=" text-align: left;color: red;">Postal code is required.
+               </span>
+            </div>
+         </div>
+      </ion-col>
+   </ion-row>
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label  style="color: #ed502d;" position="floating">Country:  
+               </ion-label>
+            </ion-item>
+         </div>
+      </ion-col>
+   </ion-row>
+   <ng-multiselect-dropdown
+     formControlName="country" 
+     [data]="dropdownList"
+     [(ngModel)]="CountrySelectedItem"
+     [settings]="dropdownSettings"
+     (onSelect)="onItemSelect($event)"
+     (onSelectAll)="onSelectAll($event)"
+    >
+    </ng-multiselect-dropdown>
+  
+     <div *ngIf="submitted && f.country.errors" class="invalid-feedback" style="padding: 10px; left;">
+               <span *ngIf="f.country.errors.required" style=" text-align: left;color: red;">Country is required.
+               </span>
+            </div>
+   <ion-row style="display: none;">
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label  style="color: #ed502d;" position="floating">Phone code:</ion-label>
+            </ion-item>
+         </div>
+      </ion-col>
+   </ion-row>
+    <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label  style="color: #ed502d;" position="floating">Phone number:</ion-label>
+            </ion-item>
+         </div>
+      </ion-col>
+   </ion-row>
+  
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <international-phone-number class="international_phone_number" placeholder="Enter phone number"  [minlength]="10" formControlName="phoneNo"></international-phone-number>
+            <div *ngIf="submitted && f.phoneNo.errors" class="invalid-feedback" style="padding: 10px; left;">
+               <span *ngIf="f.phoneNo.errors.required" style=" text-align: left;color: red;">Phone number is required.
+               </span> 
+               <span *ngIf="f.phoneNo.errors.minlength" style=" text-align: left;color: red;">Please check phone code and Phone Number limit. You cannot entered number less than 10 digits.
+               </span>  
+               <span *ngIf="f.phoneNo.errors.phoneEmptyError" style=" text-align: left;color: red;">Please check phone code.
+               </span> 
+            </div>
+         </div>
+      </ion-col>
+   </ion-row>
+ 
+
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label  style="color: #ed502d;" position="floating">Date of birth:</ion-label>
+               <ion-datetime formControlName="dob" displayFormat="DD-MM-YY" [max]="maxData"></ion-datetime>
+            </ion-item>
+         </div>
+      </ion-col>
+   </ion-row>
+   
+ 
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <!-- <ion-label color="primary" position="floating">Upload Photo</ion-label> -->
+               <ion-thumbnail slot="end">
+                     <img  [src]="image_url" onError="src='assets/images/user_dummy.png'">  
+               </ion-thumbnail>
+            </ion-item>
+            <ion-item>
+               <ion-toolbar  style="color: #ed502d;">
+                  <ion-button fill="clear" expand="full" color="light" (click)="selectImage()" style="background: #ed502d;margin: 10px auto;display: block; width: auto;text-align: center;">
+                     <ion-icon slot="start" name="camera"></ion-icon>
+                     Upload Picture
+                  </ion-button>
+               </ion-toolbar>
+            </ion-item>
+         </div>
+      </ion-col>
+   </ion-row>
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <div *ngIf="isSuccess == true" >
+               <span class="for-sub-name">{{sucessArr.message}}</span>
+            </div>
+         </div>
+      </ion-col>
+   </ion-row>
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <button class="submit-btn" expand="block" type="submit">Update profile
+            </button>
+         </div>
+      </ion-col>
+   </ion-row>
+   </form>
+</ion-content>

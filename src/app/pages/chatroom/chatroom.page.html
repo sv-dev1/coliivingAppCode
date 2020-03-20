@@ -1,0 +1,64 @@
+<ion-header>
+   <ion-toolbar>
+      <ion-buttons slot="start">
+         <ion-back-button (click)="ionViewWillLeave()" defaultHref="userlist"></ion-back-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+         <ion-icon name="more"></ion-icon>
+      </ion-buttons>
+      <ion-title>
+         Chatroom: {{nickname}}
+      </ion-title>
+   </ion-toolbar>
+</ion-header>
+<ion-content id="content" #content class="scroll-content ionic-scroll  has-header">
+   <ion-grid class="scroll" style="-webkit-transform: translate3d(0px, -50px, 0px) scale(1); margin-top: 50px;">
+      <ion-row *ngFor="let message of gruopMessages; let i = index">
+         <div *ngIf="isDifferentDay(i)">
+            <ion-badge class="chat-date">{{getMessageDate(i)}}</ion-badge>
+         </div>
+         <ion-col  class="message">
+            <ion-item style="--inner-border-width:0px!important;">
+               <span *ngIf="userId === message.from_id" slot="end" class="user_name" style="border-radius: 10px;background: #e5efc2; padding: 10px;color: #000;word-wrap: break-word;margin-top: 20px;">
+                  <span class="chatname"> You</span><br>
+                  {{ message.message }} <br><span class="timeFormat"> {{timeFormat(message.created_at)}} </span>
+                  <ion-icon name="done-all" class="chatDone-icon"></ion-icon>
+               </span>
+               <span *ngIf="userId !== message.from_id" slot="start" class="user_name" style="    border-radius: 10px;background: #f1f1f1;padding: 10px;color: #000;border: 1px solid #dcd8d8;word-wrap: break-word;margin-top: 20px;">
+               <span class="chatname"> {{message.username}}</span><br>
+               {{message.message}}  <br>  <span class="timeFormat"> {{timeFormat(message.created_at)}} </span>
+               </span> 
+            </ion-item>
+         </ion-col>
+      </ion-row>
+      <ion-row *ngFor="let message of messages">
+         <ion-col class="message" [ngClass]="{'my_message': message.from !== nickname, 'other_message': message.from !== nickname}">
+            <ion-item style="--inner-border-width:0px!important;" >
+               <span slot="end" *ngIf="userId === message.userId" class="user_name"  style="border-radius: 10px;background: #e5efc2; padding: 10px;color: #000;word-wrap: break-word;">
+               {{ message.message }}<br><span class="timeFormat"> {{timeFormat(message.created_at)}} </span>  
+               <span >
+                  <ion-icon name="checkmark" class="chatDone-icon" *ngIf="disableClick"></ion-icon>
+               </span></span>
+               <span slot="start" *ngIf="teamId === message.from && userId !== message.userId" class="user_name"  style="    border-radius: 10px;background: #f1f1f1;padding: 10px;color: #000;border: 1px solid #dcd8d8; word-wrap: break-word;">{{message.username}}: 
+               {{message.message}}  <br> <span class="timeFormat"> {{timeFormat(message.created_at)}} </span> </span> 
+            </ion-item>
+         </ion-col>
+      </ion-row>
+   </ion-grid>
+</ion-content>
+<ion-footer>
+   <ion-toolbar>
+      <ion-row class="message_row">
+         <ion-col col-11>
+            <ion-item no-lines>
+               <ion-input type="text" placeholder="Message" [(ngModel)]="message"></ion-input>
+            </ion-item>
+         </ion-col>
+         <ion-col col-1>
+            <button class="submit-btn" expand="block" type="submit" (click)="sendMessage()" [disabled]="message === ''" style="    background: #ed502d;;padding: 15px 20px;color: #fff;width: 100%;border-radius: 5px;">
+            Send
+            </button> 
+         </ion-col>
+      </ion-row>
+   </ion-toolbar>
+</ion-footer>

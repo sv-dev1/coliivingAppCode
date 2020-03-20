@@ -1,0 +1,70 @@
+<form [formGroup]="requestFrom" (submit)="sendInvite(requestFrom.value)">
+       
+    <ion-row>
+      <ion-col>
+        <div class="ion-text-start">
+          <ion-item> 
+           <ion-label color="primary" position="floating">Select a group</ion-label>
+              <ion-select formControlName="team_id" value="Select User Type" okText="Okay" cancelText="Dismiss" required>
+                 	<ion-select-option *ngFor="let team of teamListArr" [value]="team.teamId">{{team.name}}</ion-select-option> 
+              </ion-select>   
+               <div *ngIf="submitted && f.team_id.errors" class="invalid-feedback" style="padding: 10px; left;">
+                        <span *ngIf="f.team_id.errors.required" style=" text-align: left;color: red;">Team is required.
+             			</span>
+                </div>
+            </ion-item>
+        </div>
+      </ion-col>
+    </ion-row>
+            
+   <!--  <ion-row>
+      <ion-col>
+        <div class="ion-text-start">
+          <ion-item> 
+           <ion-label color="primary" position="floating">Add landlord to group chat</ion-label>
+              <ion-select formControlName="g_chat" value="Select User Type" okText="Okay" cancelText="Dismiss" required>
+                 	<ion-select-option [value]="0">No</ion-select-option> 
+                 	<ion-select-option [value]="1">Yes</ion-select-option> 
+              </ion-select>   
+               <div *ngIf="submitted && f.g_chat.errors" class="invalid-feedback" style="padding: 10px; left;">
+                        <span *ngIf="f.g_chat.errors.required" style=" text-align: left;color: red;">This is required.
+             			</span>
+                </div>
+            </ion-item>
+        </div>
+      </ion-col>
+    </ion-row> -->
+ 
+             <ion-input type="hidden" formControlName="property_id"> 
+             </ion-input>
+
+             <ion-input type="hidden" formControlName="landlord_id"> 
+             </ion-input> 
+
+  <!--   <ion-row>
+      <ion-col>
+        <div class="ion-text-start">
+          <ion-item> 
+              <ion-checkbox formControlName="agree" color="primary" checked="false" required></ion-checkbox>  
+                <ion-label style="padding-left: 5px; display: flex;"> I agree to the privacy policy and terms of service.</ion-label>
+          </ion-item>
+          <div *ngIf="submitted && f.agree.errors" class="invalid-feedback" style="padding: 10px; left;">
+             <span *ngIf="f.agree.errors.required || f.agree == undefined" style=" text-align: left;color: red;">This field is required.
+             </span>
+            <span *ngIf="fagree" style=" text-align: left;color: red;">This field is required.
+             </span> 
+          </div> 
+          
+        </div>
+      </ion-col>
+    </ion-row>   -->
+
+    <ion-row>
+      <ion-col>
+        <div class="ion-text-start">
+          <button class="submit-btn" expand="block" type="submit">Invite
+          </button>
+        </div>
+      </ion-col>
+    </ion-row> 
+  </form> 

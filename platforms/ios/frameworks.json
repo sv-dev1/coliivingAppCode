@@ -1,0 +1,15 @@
+{
+    "EventKit.framework": 1,
+    "EventKitUI.framework": 1,
+    "ImageIO.framework": 1,
+    "CoreLocation.framework": 1,
+    "AVFoundation.framework": 1,
+    "AddressBook.framework": 1,
+    "CoreText.framework": 1,
+    "SafariServices.framework": 1,
+    "Security.framework": 1,
+    "SystemConfiguration.framework": 2,
+    "libz.tbd": 1,
+    "libz.dylib": 1,
+    "CoreTelephony.framework": 1
+}

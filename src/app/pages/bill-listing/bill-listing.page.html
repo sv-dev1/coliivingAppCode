@@ -1,0 +1,69 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+
+        <ion-buttons slot="end">
+             <ion-back-button defaultHref="dashboard"></ion-back-button>
+         </ion-buttons> 
+        <ion-title>
+            Bills
+        </ion-title>
+    </ion-toolbar>
+</ion-header> 
+
+<ion-content padding> 
+<ion-row> 
+     <ion-col>
+        <button  [routerLink]="['/create-bills']" class="billList-class"> Add Bill <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon> </button>
+    
+    </ion-col>
+  </ion-row> 
+ 
+  <ion-card> 
+        <ion-list>  
+      <ion-item *ngFor="let teamList of teamListArr" [routerLink]="['/group-bill-listing']"  [queryParams]="{teamId: teamList.teamId,teamname: teamList.name}">
+        <ion-icon name="git-merge" style="height:20px;"></ion-icon>
+        <ion-label style="font-size:14px;">{{teamList.name}}</ion-label>
+         <ion-buttons  slot="end">
+             See bill
+         </ion-buttons> 
+      </ion-item>
+      <ion-item *ngIf="teamListArr?.length == 0">
+        <ion-label style="font-size:18px;">No group avaliable.</ion-label>
+      </ion-item>
+      
+    </ion-list> 
+  </ion-card>
+
+ <!--  <ion-card  *ngFor="let bills of billsArr">
+      <ion-card-header>
+         <ion-card-subtitle></ion-card-subtitle>
+         <ion-card-title class="ion-text-center" > 
+            <h2>Title: {{bills.title}}</h2>
+         </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>  
+          -Total Bill Paid Amount: {{bills.amount}}<br> 
+            -Contributing Users:
+           <ion-list *ngIf="bills.userDetail">
+            <ion-item  *ngFor="let ud of bills.userDetail">
+              <ion-grid>
+                <ion-row> 
+                  <ion-col>
+                  <h4><span><b>Email:</b> {{ud?.userProfile?.email}}</span></h4>
+                  </ion-col>
+                  <ion-col>
+                    <h4><span><b>Already paid:</b> {{ud.already_paid}}</span></h4>
+                  </ion-col>
+                  <ion-col>
+                    <h4><span><b>Need to pay :</b> {{ud.amount}}</span></h4>
+                  </ion-col>
+                </ion-row></ion-grid>
+                </ion-item>
+                </ion-list> 
+            <img src="https://apitx.kindlebit.com/uploads/{{bills.bill_id}}" onError="src='https://apitx.kindlebit.com/uploads/Bf4e77c77-ed76-49b4-84c8-79b6304b02e1'" class="profile-img">
+      </ion-card-content>
+   </ion-card>   --> 
+</ion-content>

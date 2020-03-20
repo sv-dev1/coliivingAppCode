@@ -1,0 +1,59 @@
+<ion-header>
+   <ion-toolbar>
+      <ion-buttons slot="start">
+         <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title >
+         Dashboard
+      </ion-title>
+   </ion-toolbar>
+</ion-header>
+<ion-content>
+   <ion-card [routerLink]="['/userlist']">
+      <ion-card-header>
+         <ion-card-subtitle></ion-card-subtitle>
+         <ion-card-title class="ion-text-center">
+            <ion-icon  name="people" ></ion-icon>
+           <h2>Groups</h2>
+         </ion-card-title>
+      </ion-card-header>
+      <ion-card-content> 
+      </ion-card-content>
+   </ion-card>  
+  
+   <ion-card *ngIf="roleId == 4" [routerLink]="['/house-chores']">
+      <ion-card-header>
+         <ion-card-subtitle></ion-card-subtitle>
+         <ion-card-title  class="ion-text-center">
+            <ion-icon  name="home" ></ion-icon>
+            <h2>House Chores</h2>
+         </ion-card-title>
+      </ion-card-header>
+      <ion-card-content> 
+      </ion-card-content>
+   </ion-card> 
+
+   <ion-card *ngIf="roleId == 4" [routerLink]="['/bill-listing']">
+      <ion-card-header>
+         <ion-card-subtitle></ion-card-subtitle>
+         <ion-card-title class="ion-text-center">
+            <ion-icon name="logo-usd" ></ion-icon>
+            <h2>House Expenses</h2>
+         </ion-card-title>
+      </ion-card-header>
+      <ion-card-content> 
+      </ion-card-content>
+   </ion-card> 
+
+   <ion-card *ngIf="roleId == 3" [routerLink]="['/properties-listing']">
+      <ion-card-header>
+         <ion-card-subtitle></ion-card-subtitle>
+         <ion-card-title class="ion-text-center">
+            <ion-icon  name="home" ></ion-icon>
+           <h2>Properties</h2>
+         </ion-card-title>
+      </ion-card-header>
+      <ion-card-content> 
+      </ion-card-content>
+   </ion-card> 
+</ion-content>

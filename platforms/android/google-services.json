@@ -1,0 +1,51 @@
+{
+  "project_info": {
+    "project_number": "215704000060",
+    "firebase_url": "https://coliving-1ba1f.firebaseio.com",
+    "project_id": "coliving-1ba1f",
+    "storage_bucket": "coliving-1ba1f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:215704000060:android:2d3644d615faa12f621539",
+        "android_client_info": {
+          "package_name": "com.coliving.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "215704000060-1uhsbb10au2o3njfredbrnr6h8kisioc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.coliving.app",
+            "certificate_hash": "c892a3ecd03c3826872dcbd74d488c65074158b0"
+          }
+        },
+
+
+        
+        {
+          "client_id": "215704000060-kjsglq58r8enu8qknd6d6j41vr5hcpuf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0XrsBU0gtaHeMQGks-xF2_y7pC9_jUcs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "215704000060-kjsglq58r8enu8qknd6d6j41vr5hcpuf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

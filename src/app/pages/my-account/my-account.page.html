@@ -1,0 +1,451 @@
+<ion-header>
+   <ion-toolbar>
+      <ion-buttons slot="start">
+         <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+         <ion-back-button defaultHref="/public-profile"></ion-back-button>
+      </ion-buttons>
+      <ion-title>
+         Edit Profile
+      </ion-title>
+   </ion-toolbar>
+</ion-header> 
+<ion-content>
+   <form *ngIf="loginRoleId==4" [formGroup]="update_form" (submit)="register(update_form.value)">
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label class="pk"  style="color: #ed502d;" position="floating">First name:</ion-label>
+               <ion-input type="text" formControlName="firstName" required></ion-input>
+            </ion-item>
+            <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback" style="padding: 10px; left;">
+               <span *ngIf="f.firstName.errors.required" style=" text-align: left;color: red;">First Name is required.
+               </span>
+            </div>
+         </div>
+      </ion-col>
+   </ion-row>
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label style="color: #ed502d;" position="floating">Last name:</ion-label>
+               <ion-input type="text" formControlName="lastName" required></ion-input>
+            </ion-item>
+            <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback" style="padding: 10px; left;">
+               <span *ngIf="f.lastName.errors.required" style=" text-align: left;color: red;">Last Name is required.
+               </span>
+            </div>
+         </div>
+      </ion-col>
+   </ion-row>
+    <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label style="color: #ed502d;" position="floating">User name:</ion-label>
+               <ion-input type="text" formControlName="username" required></ion-input>
+            </ion-item>
+            <div *ngIf="submitted && f.username.errors" class="invalid-feedback" style="padding: 10px; left;">
+               <span *ngIf="f.username.errors.required" style=" text-align: left;color: red;">User Name is required.
+               </span>
+            </div>
+         </div>
+      </ion-col>
+   </ion-row>
+    <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label style="color: #ed502d;" position="floating">Email:</ion-label>
+               <ion-input type="text" formControlName="email" required></ion-input>
+            </ion-item>
+            <div *ngIf="submitted && f.email.errors" class="invalid-feedback" style="padding: 10px; left;">
+               <span *ngIf="f.email.errors.required" style=" text-align: left;color: red;">Email is required.
+               </span>
+            </div>
+         </div>
+      </ion-col>
+   </ion-row>
+   <ion-row>
+     <ion-col>
+         <div class="ion-text-start">
+            <ion-label style="color: #ed502d;font-size: 13px; padding-left: 15px;" position="floating">Location:</ion-label>
+            <ion-item>
+                <input class="input_location" ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places" (onAddressChange)="onChange($event)" formControlName="address"  
+                     (focusin)="hide($event)"/>
+            </ion-item>
+             <div *ngIf="submitted && f.address.errors" class="invalid-feedback" style="padding: 10px; left;">
+                  <span *ngIf="f.address.errors.required" style=" text-align: left;color: red;">Address is required.
+                  </span>
+               </div>
+         </div>
+      </ion-col>
+   </ion-row>
+  <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label  style="color: #ed502d;" position="floating">Postal code:</ion-label>
+               <ion-input type="text" formControlName="postal_code" required></ion-input>
+            </ion-item>
+            <div *ngIf="submitted && f.postal_code.errors" class="invalid-feedback" style="padding: 10px; left;">
+               <span *ngIf="f.postal_code.errors.required" style=" text-align: left;color: red;">Postal code is required.
+               </span>
+            </div>
+         </div>
+      </ion-col>
+   </ion-row>
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label  style="color: #ed502d;" position="floating">Country:  
+               </ion-label>
+            </ion-item>
+         </div>
+      </ion-col>
+   </ion-row>
+   <ng-multiselect-dropdown
+   formControlName="country" 
+   [data]="CountryList"
+   [(ngModel)]="CountrySelectedItem" 
+   [settings]="CountrydropdownSettings" 
+   (onSelectAll)="onSelectAllCountry($event)"
+   >
+   </ng-multiselect-dropdown>
+     <div *ngIf="submitted && f.country.errors" class="invalid-feedback" style="padding: 10px; left;">
+               <span *ngIf="f.country.errors.required" style=" text-align: left;color: red;">Country is required.
+               </span>
+            </div>
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label  style="color: #ed502d;" position="floating">Nationalities:  
+               </ion-label>
+               <!-- 
+                  <ion-select formControlName="nationality" multiple>
+                    <ion-select-option *ngFor="let country of countriesArr; let idx = index" [value]="country.id">{{country.nicename}}</ion-select-option>
+                   </ion-select> -->
+            </ion-item>
+         </div>
+      </ion-col>
+   </ion-row>
+   <ng-multiselect-dropdown
+   formControlName="nationality" 
+   [data]="dropdownList"
+   [(ngModel)]="selectedItems"
+   (onDeSelect)="OnNationalityDeSelect($event)"
+   [settings]="dropdownSettings"
+   (onSelect)="onItemSelect($event)"
+   (onSelectAll)="onSelectAll($event)"
+   >
+   </ng-multiselect-dropdown>
+   <ion-row style="display: none;">
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label  style="color: #ed502d;" position="floating">Phone code:</ion-label>
+            </ion-item>
+         </div>
+      </ion-col>
+   </ion-row>
+    <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label  style="color: #ed502d;" position="floating">Phone number:</ion-label>
+            </ion-item>
+         </div>
+      </ion-col>
+   </ion-row>
+  
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <international-phone-number class="international_phone_number" placeholder="Enter phone number"  [minlength]="10" formControlName="phoneNo"></international-phone-number>
+            <div *ngIf="submitted && f.phoneNo.errors" class="invalid-feedback" style="padding: 10px; left;">
+               <span *ngIf="f.phoneNo.errors.required" style=" text-align: left;color: red;">Phone number is required.
+               </span> 
+               <span *ngIf="f.phoneNo.errors.minlength" style=" text-align: left;color: red;">Please check phone code and Phone Number limit. You cannot entered number less than 10 digits.
+               </span>  
+               <span *ngIf="f.phoneNo.errors.phoneEmptyError" style=" text-align: left;color: red;">Please check phone code.
+               </span> 
+            </div>
+         </div>
+      </ion-col>
+   </ion-row>
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label style="color: #ed502d;" position="floating">Work place/University/Company:</ion-label>
+               <ion-input type="text" formControlName="work_place"></ion-input>
+            </ion-item>
+         </div>
+      </ion-col>
+   </ion-row>
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label  style="color: #ed502d;" position="floating">Previous city of residence:</ion-label>
+               <ion-input type="text" formControlName="previous_city" ></ion-input>
+            </ion-item>
+         </div>
+      </ion-col>
+   </ion-row>
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label  style="color: #ed502d;" position="floating">Date of birth:</ion-label>
+               <ion-datetime formControlName="dob" displayFormat="DD-MM-YY"  ></ion-datetime>
+            </ion-item>
+         </div>
+      </ion-col>
+   </ion-row>
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label  style="color: #ed502d;" position="floating">Occupation:</ion-label>
+              <ion-select formControlName="occuptation" okText="Okay" cancelText="Dismiss" >
+                  <ion-select-option value="1">Full-time Employee</ion-select-option>
+                  <ion-select-option value="2">Part-time Employee</ion-select-option>
+                  <ion-select-option value="3">Part Time Student</ion-select-option>
+                  <ion-select-option value="4">Full Time Student</ion-select-option>
+                  <ion-select-option value="5">Part Time Internship</ion-select-option>
+                  <ion-select-option value="6">Full Time Internship</ion-select-option>
+               </ion-select>
+            </ion-item>
+         </div>
+      </ion-col>
+   </ion-row>
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label  style="color: #ed502d;" position="floating">Weekdays wake up time: </ion-label>
+               <ion-datetime formControlName="wakeup_time" displayFormat="h:mm a"></ion-datetime>
+            </ion-item>
+         </div>
+      </ion-col>
+   </ion-row>
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label  style="color: #ed502d;" position="floating"> Weekend wake up time:</ion-label>
+               <ion-datetime formControlName="weekend_wakup_time" displayFormat="h:mm a"></ion-datetime>
+            </ion-item>
+         </div>
+      </ion-col>
+   </ion-row>
+   
+  
+    <ion-row>
+         <ion-col>
+         
+            <ion-item>
+               <ion-label  style="color: #ed502d;" position="floating">Rental fee willing to pay:</ion-label>
+            </ion-item>
+       
+      </ion-col>
+    </ion-row>
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label  style="color: #ed502d;" position="floating">Minimum:</ion-label>
+               <ion-input type="number" formControlName="min_range" placeholder="Maximum fee"></ion-input>
+            </ion-item>
+         </div>
+      </ion-col>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label  style="color: #ed502d;" position="floating">Maximum:</ion-label>
+               <ion-input type="number" formControlName="max_range" placeholder="Maximum fee"></ion-input>
+            </ion-item>
+         </div>
+      </ion-col>
+   </ion-row>
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label  style="color: #ed502d;" position="floating">Rental fee willing to pay description:</ion-label>
+               <ion-textarea type="number" formControlName="rental_desc" placeholder="Add rental description here.."></ion-textarea>
+            </ion-item>
+         </div>
+      </ion-col>
+   </ion-row>
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label  style="color: #ed502d;" position="floating">Stay date:</ion-label>
+            </ion-item>
+         </div>
+      </ion-col>
+   </ion-row>
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label  style="color: #ed502d;" position="floating">Start date:</ion-label>
+               <ion-datetime [max]="maxData" formControlName="stay_date_start" placeholder="Select Date"></ion-datetime>
+            </ion-item>
+         </div>
+      </ion-col>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label  style="color: #ed502d;" position="floating">End date:</ion-label>
+               <ion-datetime [max]="maxData" formControlName="stay_date_end" [max]="maxData" placeholder="Select Date"></ion-datetime>
+            </ion-item>
+         </div>
+      </ion-col>
+   </ion-row>
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label  style="color: #ed502d;" position="floating">Interests:</ion-label>
+               <ion-input formControlName="interestes"></ion-input>
+            </ion-item>
+         </div>
+      </ion-col>
+   </ion-row>
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label  style="color: #ed502d;" position="floating">Biography:</ion-label>
+               <ion-input formControlName="biography"></ion-input>
+            </ion-item>
+         </div>
+      </ion-col>
+   </ion-row>
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label  style="color: #ed502d;" position="floating">Habits:</ion-label>
+               <ion-input formControlName="habits"></ion-input>
+            </ion-item>
+         </div>
+      </ion-col>
+   </ion-row>
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label  style="color: #ed502d;" position="floating">Favourite locations:</ion-label>
+               <ion-input formControlName="favourite_locations"></ion-input>
+            </ion-item>
+         </div>
+      </ion-col>
+   </ion-row>
+    <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label  style="color: #ed502d;" position="floating">Social media accounts:</ion-label>
+               <ion-input formControlName="social_account"></ion-input>
+            </ion-item>
+         </div>
+      </ion-col>
+   </ion-row>
+  
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label  style="color: #ed502d;" position="floating">Gender:</ion-label>
+               <ion-select formControlName="gender" okText="Okay" cancelText="Dismiss">
+                  <ion-select-option value="male">Male</ion-select-option>
+                  <ion-select-option value="female">Female</ion-select-option>
+                  <ion-select-option value="other">Other</ion-select-option>
+                  <ion-select-option value="not-share">I would rather not share</ion-select-option>
+               </ion-select>
+            </ion-item>
+         </div>
+      </ion-col>
+   </ion-row>
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-label  style="color: #ed502d;" position="floating">Languages spoken:  
+               </ion-label>
+            </ion-item>
+         </div>
+      </ion-col>
+   </ion-row>
+   <ng-multiselect-dropdown
+   formControlName="languages" 
+   [data]="LanguageList"
+   [(ngModel)]="LanguageSelectedItems"
+   (onDeSelect)="OnDeSelectLang($event)"
+   [settings]="LanguagedropdownSettings"
+   (onSelect)="onItemSelectLang($event)"
+   >
+   </ng-multiselect-dropdown>
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <ion-item>
+               <ion-thumbnail slot="end">
+                     <img  [src]="image_url" onError="src='assets/images/user_dummy.png'">  
+               </ion-thumbnail>
+            </ion-item>
+            <ion-item>
+               <ion-toolbar  style="color: #ed502d;">
+                  <ion-button fill="clear" expand="full" color="light" (click)="selectImage()" style="background: #ed502d;margin: 10px auto;display: block; width: auto;text-align: center;">
+                     <ion-icon slot="start" name="camera"></ion-icon>
+                     Upload Picture
+                  </ion-button>
+               </ion-toolbar>
+            </ion-item>
+         </div>
+      </ion-col>
+   </ion-row>
+  
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+
+           <ion-item>
+                  <label class="myFakeUploadButton" for="myFileInput">Upload Documents</label>
+                  <input type="file" id="myFileInput" (change)="changeListener($event)">
+                  <span class="docFile-name" *ngIf="myFiles">{{myFiles}}</span>
+            </ion-item>
+            
+         </div>
+      </ion-col>
+   </ion-row>
+
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <div *ngIf="isSuccess == true" >
+               <span class="for-sub-name">{{sucessArr.message}}</span>
+            </div>
+         </div>
+      </ion-col>
+   </ion-row>
+   <ion-row>
+      <ion-col>
+         <div class="ion-text-start">
+            <button class="submit-btn" expand="block" type="submit">Update profile
+            </button>
+         </div>
+      </ion-col>
+   </ion-row>
+   </form>
+</ion-content>

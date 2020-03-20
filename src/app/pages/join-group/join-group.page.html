@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+    </ion-buttons> 
+	<ion-buttons slot="end">
+	    <ion-back-button defaultHref="dashboard"></ion-back-button>
+	</ion-buttons> 
+    <ion-title>Join Group</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+<form [formGroup]="join_teamForm" (submit)="joinTeam(join_teamForm.value)">
+
+        <ion-row>
+            <ion-col>
+                <div class="ion-text-start">
+                    <ion-item>
+                        <ion-label position="floating" style="color: #ed502d;">Group code</ion-label>
+                        <ion-input type="text" formControlName="referCode" required></ion-input>
+                    </ion-item>
+                    <div *ngIf="submitted && f.referCode.errors" class="invalid-feedback" style=" text-align: left;color: red;font-weight: normal; font-size: 12px;font-style: italic;">
+                        <span *ngIf="f.referCode.errors.required" style=" text-align: left;color: red;">referCode is required.
+                     </span>
+                    </div>
+                </div>
+            </ion-col>
+        </ion-row>  
+
+     
+        <ion-row>
+            <ion-col>
+                <div class="ion-text-start">
+                    <button class="submit-btn" expand="block" type="submit">Join group
+                    </button>
+                </div>
+            </ion-col>
+        </ion-row> 
+    </form>
+</ion-content>

@@ -1,0 +1,12 @@
+.item.sc-ion-label-md-h, .item .sc-ion-label-md-h {
+    --color: initial;
+    display: block;
+    color: var(--color);
+    font-family: var(--ion-font-family,inherit);
+    font-size: inherit;
+    text-overflow: ellipsis;
+    white-space: pre-wrap;
+    overflow: hidden;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}

@@ -1,0 +1,32 @@
+
+<ion-header>
+   <ion-toolbar>
+      <ion-buttons slot="start">
+         <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+         <ion-back-button defaultHref="dashboard"></ion-back-button>
+      </ion-buttons>
+      <ion-title>
+            Invitations to property
+      </ion-title>
+   </ion-toolbar>
+</ion-header>
+<ion-content padding>
+    <ion-card>
+      <ion-card-content>
+         <ion-list>
+            <ion-item   *ngFor="let property of requestArr">
+               <ion-icon name="git-merge" style="height:20px;" > </ion-icon>
+                  <ion-label style="font-size:14px;">{{property?.property['name']}}</ion-label>
+                  <ion-buttons [routerLink]="['/prop-info']" [queryParams]="{propertyId: property?.propertyId}"slot="end">
+                  Info...
+                  </ion-buttons>                  
+                  <ion-buttons slot="end" (click) ="onChange('Approved',property.propertyId)" ><ion-icon name="checkmark-circle-outline" ></ion-icon>  </ion-buttons>
+                  <ion-buttons slot="end" (click) ="onChange('Declined',property.propertyId)"> <ion-icon name="close-circle-outline" ></ion-icon></ion-buttons>
+            </ion-item>
+            <ion-item *ngIf="noProperty"><h1>No Property Invitation</h1></ion-item>
+        </ion-list>
+      </ion-card-content>
+   </ion-card>
+</ion-content>
