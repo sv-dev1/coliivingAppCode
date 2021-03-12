@@ -78,7 +78,7 @@
     "ionic-select-searchable": "^2.10.0",
     "ionic-selectable": "^4.4.0",
     "ionic-stepper": "^1.1.0",
-    "jspdf": "^1.5.3",
+    "jspdf": "^2.3.1",
     "ng-multiselect-dropdown": "^0.2.6",
     "ng-socket-io": "^0.2.4",
     "ngx-accordion": "0.0.17",
